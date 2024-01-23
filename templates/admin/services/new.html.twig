@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Services
+{% endblock %}
+
+{% block body %}
+	<h1>Create new Services</h1>
+	<a href="{{ path('admin_services_index') }}">Retour</a>
+
+	{{ include('admin/services/_form.html.twig') }}
+
+{% endblock %}

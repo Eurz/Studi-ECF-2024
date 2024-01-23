@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Services
+{% endblock %}
+
+{% block body %}
+	<h1>Services</h1>
+
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ service.id }}</td>
+			</tr>
+			<tr>
+				<th>Title</th>
+				<td>{{ service.title }}</td>
+			</tr>
+			<tr>
+				<th>Description</th>
+				<td>{{ service.description }}</td>
+			</tr>
+			<tr>
+				<th>CreatedAt</th>
+				<td>{{ service.createdAt ? service.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+			</tr>
+			<tr>
+				<th>UpdatedAt</th>
+				<td>{{ service.updatedAt ? service.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+			</tr>
+			<tr>
+				<th>IsPublished</th>
+				<td>{{ service.isPublished ? 'Yes' : 'No' }}</td>
+			</tr>
+			<tr>
+				<th>Slug</th>
+				<td>{{ service.slug }}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<a href="{{ path('admin_services_index') }}">back to list</a>
+
+	<a href="{{ path('admin_services_edit', {'id': service.id}) }}">edit</a>
+
+	{{ include('admin/services/_delete_form.html.twig') }}
+{% endblock %}

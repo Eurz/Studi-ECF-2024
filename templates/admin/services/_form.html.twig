@@ -1,0 +1,34 @@
+{{ form_start(form) }}
+<div class="row">
+	<div class="col-8">
+
+		{{ form_row(form.title) }}
+		{{ form_row(form.description) }}
+	</div>
+	<div class="col-4 bg-light p-3">
+		<div class="mb-3">
+			<div>
+				<span>Créé le :
+				</span>
+				{{ service.createdAt|format_datetime('full', 'short', locale='fr',timezone='Europe/Paris')  }}</div>
+			<div>
+				<span>Mise à jour :
+				</span>
+				{{ service.updatedAt|format_datetime('full', 'short', locale='fr',timezone='Europe/Paris') }}</div>
+
+			<div>
+				<span>Slug :
+				</span>
+				{{ service.slug }}</div>
+		</div>
+		<div>
+
+			{{ form_row(form.isPublished) }}
+
+		</div>
+	</div>
+</div>
+
+
+<button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
