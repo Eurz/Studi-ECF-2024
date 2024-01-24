@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre tableau de bord
+{% endblock %}
+
+{% block body %}
+	<h1>Votre tableau de bord</h1>
+
+
+	<a href="{{ path('admin_services_new') }}" class="btn btn-primary">Ajouter un service</a>
+	{# <a href="{{ path('admin_services_new') }}" class="btn btn-primary">Ajouter un service</a> #}
+{% endblock %}

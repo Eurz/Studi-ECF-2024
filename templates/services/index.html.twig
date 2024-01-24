@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ page_title}}
+{% endblock %}
+
+{% block body %}
+
+	<h1>{{page_title}}</h1>
+
+	<div class="row row-cols-1 row-cols-md-3 g-4">
+		{% for service in services %}
+
+			<div class="col">
+				<div class="card h-100">
+					<img src="..." class="card-img-top" alt="...">
+					<div class="card-body">
+						<h2 class="card-title">{{ service.title }}</h2>
+						<p class="card-text">{{ service.description }}</p>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

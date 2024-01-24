@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ page_title}}
+{% endblock %}
+
+{% block body %}
+	<a href="{{ path('services_index') }}">Retour</a>
+
+
+	<div class="row g-4">
+
+		<div class="col">
+			<h1>{{ service.title }}</h1>
+			<p>{{ service.description }}</p>
+
+			<img src="..." class="" alt="...">
+
+		</div>
+	</div>
+{% endblock %}

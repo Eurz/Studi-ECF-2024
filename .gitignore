@@ -7,4 +7,5 @@
 /public/bundles/
 /var/
 /vendor/
+/commandes.txt
 ###< symfony/framework-bundle ###
