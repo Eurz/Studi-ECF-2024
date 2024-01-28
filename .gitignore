@@ -8,4 +8,5 @@
 /var/
 /vendor/
 /commandes.txt
+/public/uploads/services
 ###< symfony/framework-bundle ###

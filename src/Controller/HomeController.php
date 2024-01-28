@@ -14,7 +14,7 @@ class HomeController extends AbstractController
     public function index(ServicesRepository $servicesRepository): Response
     {
 
-        $services = $servicesRepository->findBy(['isPublished' => true]);
+        $services = $servicesRepository->findBy(['isPublished' => true], null, 3);
 
         return $this->render('home/index.html.twig', [
             'page_title' => 'Garage V. Parrot',

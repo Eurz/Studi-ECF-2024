@@ -27,22 +27,20 @@
 						{# <td>{{ service.updatedAt ? service.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
 						<td>{{ service.isPublished ? 'Publié' : 'Brouillon' }}</td>
 						<td>{{ service.slug }}</td>
+
 						<td>
-							{# <a href=" {{ path('admin_services_show', {'id': service.id} ) }}">show</td>
-																																								</tr>
-																																							</a>
-																																							#}
 							<a href="{{ path('admin_services_edit', {'slug': service.slug}) }}" class="btn btn-primary">
 								<span data-feather="edit">Editer</span>
 							</a>
 						</td>
 					</tr>
-				</tbody>
+				{% else %}
+					<tr>
+						<td colspan="8">no records found</td>
+					</tr>
+				{% endfor %}
 			</tbody>
-		</td>
-	</tr>
-{% else %}
-	<tr>
-		<td colspan="8">no records found</td>
-	</tr>
-{% endfor %}</tbody></table></div><a href="{{ path('admin_services_new') }}" class="btn btn-primary">Ajouter un service</a>{% endblock %}
+		</table>
+	</div>
+	<a href="{{ path('admin_services_new') }}" class="btn btn-primary">Ajouter un service</a>
+{% endblock %}

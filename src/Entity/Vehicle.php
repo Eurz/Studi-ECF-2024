@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: VehiclesRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-class Vehicles
+class Vehicle
 {
     #[ORM\Id]
     #[ORM\GeneratedValue('CUSTOM')]
@@ -33,23 +33,22 @@ class Vehicles
     private ?string $title = null;
 
     #[ORM\Column]
-    #[Assert\NotNull()]
+    #[Assert\NotNull(message: 'createdAt')]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
-    #[Assert\NotNull()]
+    #[Assert\NotNull(message: 'updatedAt')]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
-    #[Assert\NotNull()]
+    #[Assert\NotNull(message: 'La date de mise en circulation est obligatoire')]
     private ?\DateTimeImmutable $releaseDate = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 8, scale: 2, nullable: true)]
-
-    private ?string $price = null;
+    private ?int $price = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $featured_image = null;
+    private ?string $featuredImage = null;
 
     #[ORM\Column(nullable: true)]
     #[Assert\PositiveOrZero()]
@@ -57,7 +56,7 @@ class Vehicles
 
     #[ORM\Column]
     #[Assert\PositiveOrZero()]
-    private ?int $fiscal_power = null;
+    private ?int $fiscalPower = null;
 
     #[ORM\Column(nullable: true)]
     #[Assert\PositiveOrZero()]
@@ -67,21 +66,21 @@ class Vehicles
     private ?string $motorization = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 4, scale: 1, nullable: true)]
-    #[Assert\PositiveOrZero()]
+    // #[Assert\PositiveOrZero()]
     private ?string $consumption = null;
 
     #[ORM\Column(nullable: true)]
     #[Assert\PositiveOrZero()]
-    private ?int $emission_rate = null;
+    private ?int $emissionRate = null;
 
     #[ORM\Column(length: 1, nullable: true)]
-    private ?string $energy_class = null;
+    private ?string $energyClass = null;
 
     #[ORM\Column(length: 20, nullable: true)]
     private ?string $color = null;
 
     #[ORM\Column(nullable: true)]
-    #[Assert\PositiveOrZero()]
+    // #[Assert\PositiveOrZero()]
     private ?int $length = null;
 
     #[ORM\Column(nullable: true)]
@@ -91,18 +90,26 @@ class Vehicles
     private ?int $height = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $unloaded_weight = null;
+    private ?int $unloadedWeight = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $total_weight = null;
+    private ?int $totalWeight = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $max_speed = null;
+    private ?int $maxSpeed = null;
 
     #[ORM\Column(nullable: true)]
     #[Assert\PositiveOrZero()]
-    private ?int $number_of_doors = null;
+    private ?int $numberOfDoors = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $engineDisplacement = null;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
+    }
 
     #[ORM\PrePersist]
     public function prePersist()
@@ -205,12 +212,12 @@ class Vehicles
         return $this;
     }
 
-    public function getPrice(): ?string
+    public function getPrice(): ?int
     {
         return $this->price;
     }
 
-    public function setPrice(?string $price): static
+    public function setPrice(?int $price): static
     {
         $this->price = $price;
 
@@ -219,12 +226,12 @@ class Vehicles
 
     public function getFeaturedImage(): ?string
     {
-        return $this->featured_image;
+        return $this->featuredImage;
     }
 
-    public function setFeaturedImage(string $featured_image): static
+    public function setFeaturedImage(string $featuredImage): static
     {
-        $this->featured_image = $featured_image;
+        $this->featuredImage = $featuredImage;
 
         return $this;
     }
@@ -243,12 +250,12 @@ class Vehicles
 
     public function getFiscalPower(): ?int
     {
-        return $this->fiscal_power;
+        return $this->fiscalPower;
     }
 
-    public function setFiscalPower(int $fiscal_power): static
+    public function setFiscalPower(int $fiscalPower): static
     {
-        $this->fiscal_power = $fiscal_power;
+        $this->fiscalPower = $fiscalPower;
 
         return $this;
     }
@@ -291,24 +298,24 @@ class Vehicles
 
     public function getEmissionRate(): ?int
     {
-        return $this->emission_rate;
+        return $this->emissionRate;
     }
 
-    public function setEmissionRate(?int $emission_rate): static
+    public function setEmissionRate(?int $emissionRate): static
     {
-        $this->emission_rate = $emission_rate;
+        $this->emissionRate = $emissionRate;
 
         return $this;
     }
 
     public function getEnergyClass(): ?string
     {
-        return $this->energy_class;
+        return $this->energyClass;
     }
 
-    public function setEnergyClass(?string $energy_class): static
+    public function setEnergyClass(?string $energyClass): static
     {
-        $this->energy_class = $energy_class;
+        $this->energyClass = $energyClass;
 
         return $this;
     }
@@ -363,48 +370,60 @@ class Vehicles
 
     public function getUnloadedWeight(): ?int
     {
-        return $this->unloaded_weight;
+        return $this->unloadedWeight;
     }
 
-    public function setUnloadedWeight(?int $unloaded_weight): static
+    public function setUnloadedWeight(?int $unloadedWeight): static
     {
-        $this->unloaded_weight = $unloaded_weight;
+        $this->unloadedWeight = $unloadedWeight;
 
         return $this;
     }
 
     public function getTotalWeight(): ?int
     {
-        return $this->total_weight;
+        return $this->totalWeight;
     }
 
-    public function setTotalWeight(?int $total_weight): static
+    public function setTotalWeight(?int $totalWeight): static
     {
-        $this->total_weight = $total_weight;
+        $this->totalWeight = $totalWeight;
 
         return $this;
     }
 
     public function getMaxSpeed(): ?int
     {
-        return $this->max_speed;
+        return $this->maxSpeed;
     }
 
-    public function setMaxSpeed(?int $max_speed): static
+    public function setMaxSpeed(?int $maxSpeed): static
     {
-        $this->max_speed = $max_speed;
+        $this->maxSpeed = $maxSpeed;
 
         return $this;
     }
 
     public function getNumberOfDoors(): ?int
     {
-        return $this->number_of_doors;
+        return $this->numberOfDoors;
     }
 
-    public function setNumberOfDoors(?int $number_of_doors): static
+    public function setNumberOfDoors(?int $numberOfDoors): static
     {
-        $this->number_of_doors = $number_of_doors;
+        $this->numberOfDoors = $numberOfDoors;
+
+        return $this;
+    }
+
+    public function getEngineDisplacement(): ?int
+    {
+        return $this->engineDisplacement;
+    }
+
+    public function setEngineDisplacement(?int $engineDisplacement): static
+    {
+        $this->engineDisplacement = $engineDisplacement;
 
         return $this;
     }

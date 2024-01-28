@@ -1,0 +1,58 @@
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+{{ form_start(form) }}
+
+<div class="row">
+	<div class="col-md-4">
+		{{ form_row(form.brandName)}}
+	</div>
+	<div class="col-md-4">
+		{{ form_row(form.type)}}
+	</div>
+	<div class="col-md-4">
+		{{ form_row(form.model)}}
+	</div>
+</div>
+{{ form_row(form.title)}}
+{{ form_row(form.featuredImage)}}
+<div class="row">
+	<div class="col-md-4">
+		{{ form_row(form.price)}}
+	</div>
+	<div class="col-md-4">
+		{{ form_row(form.mileage)}}
+	</div>
+	<div class="col-md-4">
+		{{ form_row(form.releaseDate)}}
+	</div>
+</div>
+{# Features #}
+<div class="row">
+	<div class="col-md-3">
+		{{ form_row(form.fiscalPower)}}
+	</div>
+	<div class="col-md-3">
+		{{ form_row(form.power)}}
+	</div>
+	<div class="col-md-3">
+		{{ form_row(form.motorization)}}
+	</div>
+	<div class="col-md-3">
+		{{ form_row(form.engineDisplacement)}}
+	</div>
+</div>
+
+{{ form_row(form.consumption)}}
+{{ form_row(form.emissionRate)}}
+{{ form_row(form.energyClass)}}
+{{ form_row(form.color)}}
+{{ form_row(form.length)}}
+{{ form_row(form.width)}}
+{{ form_row(form.height)}}
+{{ form_row(form.unloadedWeight)}}
+{{ form_row(form.totalWeight)}}
+{{ form_row(form.maxSpeed)}}
+{{ form_row(form.numberOfDoors)}}
+
+<button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+
+{{ form_end(form) }}
