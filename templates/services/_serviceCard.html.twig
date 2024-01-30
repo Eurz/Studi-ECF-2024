@@ -1,0 +1,12 @@
+<div class="card border-0 h-100">
+	{% if service.imageName %}
+		<img src="{{ vich_uploader_asset(service) }}" class="card-img-top img-fluid" alt="{{service.title}}">
+	{% else %}
+		<img src="{{ asset('uploads/images/default.png') }}" class="card-img-top img-fluid" alt="{{service.title}}">
+	{% endif %}
+	<div class="card-body">
+		<h2 class="card-title">{{ service.title }}</h2>
+		<p class="card-text">{{ service.excerpt }}</p>
+		<a href="{{ path('services_view', {'slug': service.slug}) }}" class="btn btn-primary">Découvrir</a>
+	</div>
+</div>

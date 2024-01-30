@@ -8,13 +8,17 @@
 	<a href="{{ path('services_index') }}">Retour</a>
 
 
-	<div class="row g-4">
+	<div class="row">
 
 		<div class="col">
 			<h1>{{ service.title }}</h1>
 			<p>{{ service.description }}</p>
+		</div>
+		<div class="col-sm-4">
+			{% if service.imageName %}
+				<img src="{{ vich_uploader_asset(service) }}" class="card-img-top img-fluid" alt="{{service.title}}">
+			{% endif %}
 
-			<img src="..." class="" alt="...">
 
 		</div>
 	</div>

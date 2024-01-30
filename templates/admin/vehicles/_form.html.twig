@@ -2,11 +2,9 @@
 {{ form_start(form) }}
 
 <div class="row">
+
 	<div class="col-md-4">
 		{{ form_row(form.brandName)}}
-	</div>
-	<div class="col-md-4">
-		{{ form_row(form.type)}}
 	</div>
 	<div class="col-md-4">
 		{{ form_row(form.model)}}
@@ -26,30 +24,61 @@
 	</div>
 </div>
 {# Features #}
-<div class="row">
-	<div class="col-md-3">
-		{{ form_row(form.fiscalPower)}}
+<fieldset>
+	<legend>Motorisation</legend>
+	<div class="row">
+		<div class="col-md-3">
+			{{ form_row(form.fiscalPower)}}
+		</div>
+		<div class="col-md-3">
+			{{ form_row(form.power)}}
+		</div>
+		<div class="col-md-3">
+			{{ form_row(form.motorization)}}
+		</div>
+		<div class="col-md-3">
+			{{ form_row(form.engineDisplacement)}}
+		</div>
 	</div>
-	<div class="col-md-3">
-		{{ form_row(form.power)}}
-	</div>
-	<div class="col-md-3">
-		{{ form_row(form.motorization)}}
-	</div>
-	<div class="col-md-3">
-		{{ form_row(form.engineDisplacement)}}
-	</div>
-</div>
+</fieldset>
 
 {{ form_row(form.consumption)}}
 {{ form_row(form.emissionRate)}}
 {{ form_row(form.energyClass)}}
 {{ form_row(form.color)}}
-{{ form_row(form.length)}}
-{{ form_row(form.width)}}
-{{ form_row(form.height)}}
-{{ form_row(form.unloadedWeight)}}
-{{ form_row(form.totalWeight)}}
+
+<fieldset>
+	<legend>Poids et dimensions</legend>
+	<div class="row mb-3">
+		<div class="col-2">Dimensions</div>
+		<div class="col-2">
+			<div class="input-group">
+				<span class="input-group-text">L</span>
+				{{ form_widget(form.length)}}
+			</div>
+		</div>
+		<div class="col-2">
+
+			<div class="input-group">
+				<span class="input-group-text">l</span>
+				{{ form_widget(form.width)}}
+			</div>
+		</div>
+		<div class="col-2">
+			<div class="input-group">
+				<span class="input-group-text">h</span>
+				{{ form_widget(form.height)}}</div>
+		</div>
+	</div>
+	<div class="row mb-3">
+		<div class="col-2">Poids</div>
+
+		<div class="col-2">
+			{{ form_widget(form.unloadedWeight)}}</div>
+		<div class="col-2">
+			{{ form_widget(form.totalWeight)}}</div>
+	</div>
+</fieldset>
 {{ form_row(form.maxSpeed)}}
 {{ form_row(form.numberOfDoors)}}
 

@@ -5,6 +5,7 @@
 		{{ form_row(form.title) }}
 		{{ form_row(form.excerpt) }}
 		{{ form_row(form.description) }}
+		{{ form_row(form.imageFile) }}
 	</div>
 	<div class="col-4 bg-light p-3">
 		<div class="mb-3">
@@ -23,13 +24,11 @@
 				{{ service.slug }}</div>
 		</div>
 		<div>
-
 			{{ form_row(form.isPublished) }}
-
 		</div>
 	</div>
 </div>
 
 
-<button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+<button class="btn btn-sm btn-primary">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}

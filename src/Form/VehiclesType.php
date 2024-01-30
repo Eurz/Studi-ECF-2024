@@ -3,9 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Vehicle;
+use Doctrine\ORM\Mapping\Id;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -26,7 +26,6 @@ class VehiclesType extends AbstractType
                     'Citroen' => 'Citroen'
                 ]
             ])
-            ->add('type', TextType::class, ['label' => 'Type'])
             ->add('model', ChoiceType::class, [
                 'label' => 'Modèle',
                 'choices' => [
@@ -52,15 +51,15 @@ class VehiclesType extends AbstractType
             ->add('engineDisplacement', NumberType::class, ['label' => 'Cylindrée (cm3)'])
             ->add('consumption', NumberType::class, ['label' => 'Consommation (l/100km)'])
             ->add('emissionRate', IntegerType::class, ['label' => 'Emission (g CO2/km)'])
-            ->add('energyClass')
+            ->add('energyClass', TextType::class, ['required' => false,])
             ->add('color', TextType::class, ['label' => 'Couleur'])
-            ->add('length', IntegerType::class, ['label' => 'Longueur'])
-            ->add('width', IntegerType::class, ['label' => 'Largeur'])
-            ->add('height', IntegerType::class, ['label' => 'Hauteur'])
-            ->add('unloadedWeight', IntegerType::class, ['label' => 'Poids à vide (kg)'])
-            ->add('totalWeight', IntegerType::class, ['label' => 'Poids total en charge (kg)'])
-            ->add('maxSpeed', IntegerType::class, ['label' => 'Vitesse maximale (km/h)'])
-            ->add('numberOfDoors', IntegerType::class, ['label' => 'Nombre de portes']);
+            ->add('length', IntegerType::class, ['label' => 'Longueur', 'row_attr' => ['class' => 'test', 'id' => 'coucou']])
+            ->add('width', IntegerType::class, ['label' => 'Largeur',])
+            ->add('height', IntegerType::class, ['label' => 'Hauteur',])
+            ->add('unloadedWeight', IntegerType::class, ['label' => 'Poids à vide (kg)',])
+            ->add('totalWeight', IntegerType::class, ['label' => 'Poids total en charge (kg)',])
+            ->add('maxSpeed', IntegerType::class, ['label' => 'Vitesse maximale (km/h)',])
+            ->add('numberOfDoors', IntegerType::class, ['label' => 'Nombre de portes',]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

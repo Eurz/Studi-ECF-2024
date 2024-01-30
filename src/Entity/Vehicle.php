@@ -18,48 +18,45 @@ class Vehicle
     private ?string $id = null;
 
     #[ORM\Column(length: 50)]
-    #[Assert\NotBlank()]
+    // #[Assert\NotBlank()]
     private ?string $brandName = null;
 
-    #[ORM\Column(length: 50)]
-    #[Assert\NotBlank()]
-    private ?string $type = null;
 
     #[ORM\Column(length: 50)]
-    #[Assert\NotBlank()]
+    // #[Assert\NotBlank()]
     private ?string $model = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $title = null;
 
     #[ORM\Column]
-    #[Assert\NotNull(message: 'createdAt')]
+    // #[Assert\NotNull(message: 'createdAt')]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
-    #[Assert\NotNull(message: 'updatedAt')]
+    // #[Assert\NotNull(message: 'updatedAt')]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
-    #[Assert\NotNull(message: 'La date de mise en circulation est obligatoire')]
+    // #[Assert\NotNull(message: 'La date de mise en circulation est obligatoire')]
     private ?\DateTimeImmutable $releaseDate = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 8, scale: 2, nullable: true)]
     private ?int $price = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $featuredImage = null;
 
     #[ORM\Column(nullable: true)]
-    #[Assert\PositiveOrZero()]
+    // #[Assert\PositiveOrZero()]
     private ?int $mileage = null;
 
     #[ORM\Column]
-    #[Assert\PositiveOrZero()]
+    // #[Assert\PositiveOrZero()]
     private ?int $fiscalPower = null;
 
     #[ORM\Column(nullable: true)]
-    #[Assert\PositiveOrZero()]
+    // #[Assert\PositiveOrZero()]
     private ?int $power = null;
 
     #[ORM\Column(length: 50, nullable: true)]
@@ -99,10 +96,10 @@ class Vehicle
     private ?int $maxSpeed = null;
 
     #[ORM\Column(nullable: true)]
-    #[Assert\PositiveOrZero()]
+    // #[Assert\PositiveOrZero()]
     private ?int $numberOfDoors = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(type: Types::DECIMAL, precision: 3, scale: 1, nullable: true)]
     private ?int $engineDisplacement = null;
 
     public function __construct()
@@ -140,17 +137,6 @@ class Vehicle
         return $this;
     }
 
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): static
-    {
-        $this->type = $type;
-
-        return $this;
-    }
 
     public function getModel(): ?string
     {

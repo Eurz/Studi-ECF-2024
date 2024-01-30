@@ -6,7 +6,7 @@
 {% block body %}
 
 	<h1>{{ page_title }}</h1>
-	<div>
+	<div class="text-end">
 		<a href="{{ path('admin_vehicles_new') }}" class="btn btn-primary">Ajouter un véhicule</a>
 	</div>
 	<div class="table-responsive-md">
@@ -39,11 +39,7 @@
 						<td>{{ vehicle.featuredImage}}</td>
 						<td>{{ vehicle.releaseDate|date('d/m/Y', timezone="Europe/Paris")}}</td>
 						<td>{{ vehicle.motorization}}</td>
-						{# <td>
-																															<a href="{{ path('admin_vehicles_edit', {'id': vehicle.id}) }}" class="btn btn-sm btn-primary">
-																																<span data-feather="edit">Editer</span>
-																															</a>
-																														</td> #}
+						{# <td><a href="{{ path('admin_vehicles_edit', {'id': vehicle.id}) }}" class="btn btn-sm btn-primary"><span data-feather="edit">Editer</span></a></td> #}
 					</tr>
 				{% else %}
 					<tr>

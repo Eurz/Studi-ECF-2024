@@ -9,4 +9,5 @@
 /vendor/
 /commandes.txt
 /public/uploads/services
+/migrations
 ###< symfony/framework-bundle ###
