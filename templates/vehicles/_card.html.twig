@@ -1,0 +1,34 @@
+<div
+	class="card border-0 h-100">
+	{# {% if vehicle.imageName %}
+						<img src="{{ vich_uploader_asset(service) }}" class="card-img-top img-fluid" alt="{{service.title}}">
+					{% else %}
+						<img src="{{ asset('uploads/images/default.png') }}" class="card-img-top img-fluid" alt="{{service.title}}">
+					{% endif %} #}
+	<img src="{{ asset('uploads/images/default.png') }}" class="card-img-top img-fluid" alt="{{vehicle.title}}">
+	<div class="card-body">
+		<h2 class="card-title">{{ vehicle.brandName }}
+			{{ vehicle.model }}</h2>
+		<p class="card-text">{{ vehicle.price }}
+			€ TTC</p>
+		<div class="row row-cols-2">
+			<div class="col">Puiss. :{{ vehicle.power}}
+				kW (
+				{{ vehicle.fiscalPower}}
+				ch
+																																																																)
+			</div>
+			<div class="col">Année :
+				{{ vehicle.releaseDate|date('Y', timezone="Europe/Paris")}}</div>
+			<div class="col">Moteur :
+				{{ vehicle.motorization}}
+				(
+				{{vehicle.engineDisplacement}}
+				) cm3</div>
+			<div class="col">Kilométrage:
+				{{ vehicle.mileage}}</div>
+		</div>
+
+		<a href="{{ path('vehicles_view', {'id': vehicle.id}) }}" class="btn btn-primary">Détails</a>
+	</div>
+</div>

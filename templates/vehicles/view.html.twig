@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+	<a href="{{ path('vehicles_index') }}">Retour</a>
+
+	<div>Véhicule ajouté le{{vehicle.createdAt|date('d/m/Y', timezone="Europe/Paris") }}</div>
+	<div class="row">
+		<div class="col">
+			<h1>{{ vehicle.brandName }}
+				{{ vehicle.model}}</h1>
+			<div>{{ vehicle.engineDisplacement}}
+				{{vehicle.color}}</div>
+			<div>{{vehicle.price }}
+				€ TTC</div>
+		</div>
+		<div class="col-sm-4">
+			<h3>Options</h3>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<div class="row row-cols-2">
+				<div class="col">Puiss. :{{ vehicle.power}}
+					kW ({{ vehicle.fiscalPower}}
+					ch)
+				</div>
+				<div class="col">Année :
+					{{ vehicle.releaseDate|date('Y', timezone="Europe/Paris")}}</div>
+				<div class="col">Moteur :
+					{{ vehicle.motorization}}
+					(
+					{{vehicle.engineDisplacement}}
+					) cm3</div>
+				<div class="col">Kilométrage:
+					{{ vehicle.mileage}}
+					kms</div>
+				<div class="col">
+					Conso :
+					{{ vehicle.consumption}}
+					l/100km</div>
+				<div class="col">
+					Emission :
+					{{ vehicle.emissionRate}}
+					g CO2/km (Class :
+					{{ vehicle.energyClass}})</div>
+				<div class="col">
+					Vitesse max. :{{vehicle.maxSpeed}}
+					{{vehicle.numberOfDoors}}
+					portes
+				</div>
+			</div>
+		</div>
+		<div class="col">
+			Dimensions
+			<div>
+				Largeur :
+				{{ vehicle.width}}</div>
+			<div>Longueur :
+				{{vehicle.length}}</div>
+			<div>Hauteur{{ vehicle.height}}</div>
+		</div>
+		<div class="col">
+			Poids
+			<div>
+				A vide :
+				{{ vehicle.unloadedWeight}}</div>
+			<div>En charge :
+				{{vehicle.totalWeight}}</div>
+		</div>
+	</div>
+{% endblock %}

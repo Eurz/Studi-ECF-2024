@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Véhicules d'occasions
+{% endblock %}
+
+{% block body %}
+	<h1>{{ pageTitle }}</h1>
+	{% form_theme formSearch 'bootstrap_5_layout.html.twig' %}
+	{{ form_start(formSearch, {'attr' : {'id':'formVehicleFilters'}}) }}
+	<div class="row">
+
+		<div class="col">
+			{{form_row (formSearch.minPrice)}}
+		</div>
+
+		<div class="col">
+			{{form_row (formSearch.maxPrice)}}
+		</div>
+
+		<div class="col">
+			{{form_row (formSearch.minMileage)}}
+		</div>
+		<div class="col">
+			{{form_row (formSearch.maxMileage)}}
+		</div>
+		<div class="col-auto">
+			<button class="btn btn-sm btn-primary" id="btnSearch">Filtrer</button>
+		</div>
+	</div>
+	{{ form_end(formSearch) }}
+	<div class="row row-cols-1 row-cols-md-3 g-4 js-vehicles">
+		{% for vehicle in vehicles %}
+			{% include "./vehicles/_card.html.twig" %}
+		{% endfor %}
+	</div>
+{% endblock %}
+{% block javascripts %}
+
+	{# <script src="https://unpkg.com/axios/dist/axios.min.js"></script> #}
+	<script src="{{ asset('js/vehicle-filter.js') }}"></script>
+
+	{# <script>
+		window.addEventListener('load', function (event) {
+		document.querySelector('#btnSearch').addEventListener('click', vehiclesFilter)
+		})
+		
+		function vehiclesFilter(e) {
+		e.preventDefault()
+		const formFilter = document.getElementById('formVehicleFilters')
+		const data = new FormData(formFilter)
+		const headers = {
+		'Content-Type': 'application/json'
+		}
+		
+		const body = {}
+		for (const [key, value] of data) {
+		body[key] = value
+		}
+		
+		// console.log(body)
+		const test = fetch(formFilter.action + 'filter/list', {
+		method: 'POST',
+		headers,
+		body: JSON.stringify(body)
+		}).then((res) => res.json()).then((vehicles) => {
+		const vehiclesWrapper = document.querySelector('.js-vehicles')
+		vehiclesWrapper.innerHTML = ''
+		let html = ''
+		for (const vehicle of vehicles) {
+		console.log(vehicle)
+		html += `<div class="card border-0 h-100">`
+		html += `<img src="/uploads/images/default.png') }}" class="card-img-top img-fluid" alt="${
+		vehicle.title
+		}">`
+		html += `<div class="card-body">`
+		html += `<h2> ${
+		vehicle.brandName
+		} ${
+		vehicle.model
+		}</h2>`
+		html += `<p class="card-text"> ${
+		vehicle.price
+		} </p>`
+		
+		html += `<div class="row row-cols-2">`
+		html += `<div class="col">Puiss. :${
+		vehicle.power
+		} kW (${
+		vehicle.fiscalPower
+		} ch )</div>`
+		html += `<div class="col">Année :${
+		vehicle.releaseDate
+		}</div>`
+		html += `<div class="col">Moteur :${
+		vehicle.motorization
+		} (${
+		vehicle.engineDisplacement
+		} cm3)</div>`
+		html += `<div class="col">Kilométrage :${
+		vehicle.mileage
+		} </div>`
+		
+		html += `</div>`
+		html += `<a href="{{ path('vehicles_view', {'id':  ${
+		vehicle.id
+		}  }) }}" class="btn btn-primary">Détails</a>`
+		html += `</div>`
+		html += `</div>`
+		vehiclesWrapper.innerHTML += html
+		html = ''
+		}
+		}).catch(function (error) { // en cas d’échec de la requête
+		console.log(error)
+		})
+		}
+		</script> #}
+{% endblock %}
