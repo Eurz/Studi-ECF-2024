@@ -63,20 +63,13 @@ class Photo
             $this->updatedAt = new \DateTimeImmutable();
         }
     }
+
     public function getImageFile(): ?File
     {
         return $this->imageFile;
     }
 
-    public function setImageName(?string $imageName): void
-    {
-        $this->imageName = $imageName;
-    }
 
-    public function getImageName(): ?string
-    {
-        return $this->imageName;
-    }
 
     public function setImageSize(?int $imageSize): void
     {
@@ -113,4 +106,42 @@ class Photo
 
         return $this;
     }
+
+    /**
+     * Get the value of imageName
+     */
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    // public function getCreatedAt()
+    // {
+    //     return $this->createdAt;
+    // }
+
+    // public function setCreatedAt($createdAt)
+    // {
+    //     $this->createdAt = $createdAt;
+
+    //     return $this;
+    // }
+
+    // public function getUpdatedAt()
+    // {
+    //     return $this->updatedAt;
+    // }
+
+    // public function setUpdatedAt($updatedAt)
+    // {
+    //     $this->updatedAt = $updatedAt;
+
+    //     return $this;
+    // }
 }

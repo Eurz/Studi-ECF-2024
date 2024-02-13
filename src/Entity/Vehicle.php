@@ -28,9 +28,6 @@ class Vehicle
     #[Assert\NotBlank()]
     private ?string $model = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $title = null;
-
     #[ORM\Column]
     #[Assert\NotNull(message: 'createdAt')]
     private ?\DateTimeImmutable $createdAt = null;
@@ -53,12 +50,11 @@ class Vehicle
     #[Assert\PositiveOrZero()]
     private ?int $mileage = null;
 
-    #[ORM\Column]
+    #[ORM\Column()]
     #[Assert\PositiveOrZero()]
     private ?int $fiscalPower = null;
 
     #[ORM\Column(nullable: true)]
-    #[Assert\PositiveOrZero()]
     private ?int $power = null;
 
     #[ORM\Column(length: 50, nullable: true)]
@@ -68,31 +64,31 @@ class Vehicle
     #[Assert\PositiveOrZero()]
     private ?string $consumption = null;
 
-    #[ORM\Column(nullable: true)]
-    #[Assert\PositiveOrZero()]
-    private ?int $emissionRate = null;
+    // #[ORM\Column(nullable: true)]
+    // #[Assert\PositiveOrZero()]
+    // private ?int $emissionRate = null;
 
-    #[ORM\Column(length: 1, nullable: true)]
-    private ?string $energyClass = null;
+    // #[ORM\Column(length: 1, nullable: true)]
+    // private ?string $energyClass = null;
 
     #[ORM\Column(length: 20, nullable: true)]
     private ?string $color = null;
 
-    #[ORM\Column(nullable: true)]
-    #[Assert\PositiveOrZero()]
-    private ?int $length = null;
+    // #[ORM\Column(nullable: true)]
+    // #[Assert\PositiveOrZero()]
+    // private ?int $length = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $width = null;
+    // #[ORM\Column(nullable: true)]
+    // private ?int $width = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $height = null;
+    // #[ORM\Column(nullable: true)]
+    // private ?int $height = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $unloadedWeight = null;
+    // #[ORM\Column(nullable: true)]
+    // private ?int $unloadedWeight = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $totalWeight = null;
+    // #[ORM\Column(nullable: true)]
+    // private ?int $totalWeight = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $maxSpeed = null;
@@ -156,17 +152,17 @@ class Vehicle
         return $this;
     }
 
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
+    // public function getTitle(): ?string
+    // {
+    //     return $this->title;
+    // }
 
-    public function setTitle(?string $title): static
-    {
-        $this->title = $title;
+    // public function setTitle(?string $title): static
+    // {
+    //     $this->title = $title;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
@@ -288,29 +284,29 @@ class Vehicle
         return $this;
     }
 
-    public function getEmissionRate(): ?int
-    {
-        return $this->emissionRate;
-    }
+    // public function getEmissionRate(): ?int
+    // {
+    //     return $this->emissionRate;
+    // }
 
-    public function setEmissionRate(?int $emissionRate): static
-    {
-        $this->emissionRate = $emissionRate;
+    // public function setEmissionRate(?int $emissionRate): static
+    // {
+    //     $this->emissionRate = $emissionRate;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getEnergyClass(): ?string
-    {
-        return $this->energyClass;
-    }
+    // public function getEnergyClass(): ?string
+    // {
+    //     return $this->energyClass;
+    // }
 
-    public function setEnergyClass(?string $energyClass): static
-    {
-        $this->energyClass = $energyClass;
+    // public function setEnergyClass(?string $energyClass): static
+    // {
+    //     $this->energyClass = $energyClass;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getColor(): ?string
     {
@@ -324,65 +320,65 @@ class Vehicle
         return $this;
     }
 
-    public function getLength(): ?int
-    {
-        return $this->length;
-    }
+    // public function getLength(): ?int
+    // {
+    //     return $this->length;
+    // }
 
-    public function setLength(?int $length): static
-    {
-        $this->length = $length;
+    // public function setLength(?int $length): static
+    // {
+    //     $this->length = $length;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getWidth(): ?int
-    {
-        return $this->width;
-    }
+    // public function getWidth(): ?int
+    // {
+    //     return $this->width;
+    // }
 
-    public function setWidth(?int $width): static
-    {
-        $this->width = $width;
+    // public function setWidth(?int $width): static
+    // {
+    //     $this->width = $width;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getHeight(): ?int
-    {
-        return $this->height;
-    }
+    // public function getHeight(): ?int
+    // {
+    //     return $this->height;
+    // }
 
-    public function setHeight(?int $height): static
-    {
-        $this->height = $height;
+    // public function setHeight(?int $height): static
+    // {
+    //     $this->height = $height;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getUnloadedWeight(): ?int
-    {
-        return $this->unloadedWeight;
-    }
+    // public function getUnloadedWeight(): ?int
+    // {
+    //     return $this->unloadedWeight;
+    // }
 
-    public function setUnloadedWeight(?int $unloadedWeight): static
-    {
-        $this->unloadedWeight = $unloadedWeight;
+    // public function setUnloadedWeight(?int $unloadedWeight): static
+    // {
+    //     $this->unloadedWeight = $unloadedWeight;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getTotalWeight(): ?int
-    {
-        return $this->totalWeight;
-    }
+    // public function getTotalWeight(): ?int
+    // {
+    //     return $this->totalWeight;
+    // }
 
-    public function setTotalWeight(?int $totalWeight): static
-    {
-        $this->totalWeight = $totalWeight;
+    // public function setTotalWeight(?int $totalWeight): static
+    // {
+    //     $this->totalWeight = $totalWeight;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getMaxSpeed(): ?int
     {

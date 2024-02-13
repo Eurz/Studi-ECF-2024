@@ -9,17 +9,23 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichFileType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class PhotoType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('imageName', VichFileType::class, [
-                'label' => 'Ajouter une photo',
+            ->add('imageFile', VichImageType::class, [
+                'label' => false,
                 'required' => false,
                 'allow_delete' => true,
-                'download_uri' => true,
+                'delete_label' => 'Supprimer',
+                'download_label' => true,
+                // 'download_uri' => true,
+                'image_uri' => true,
+                // 'imagine_pattern' => '...',
+                'asset_helper' => true,
             ])
             // ->add('imageSize')
             // ->add('mimeType')

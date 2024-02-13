@@ -2,94 +2,56 @@
 {{ form_start(form) }}
 
 <div class="row">
+	<div class="col">
+		<div>
+			{{ form_row(form.brandName)}}
+		</div>
+		<div>
+			{{ form_row(form.model)}}
+		</div>
+		<div>
+			{{ form_row(form.releaseDate)}}
+		</div>
+		<div>
+			{{ form_row(form.price)}}
+		</div>
+		<div>{{ form_row(form.color)}}</div>
+		<div>{{ form_row(form.numberOfDoors)}}</div>
 
-	<div class="col-md-4">
-		{{ form_row(form.brandName)}}
 	</div>
-	<div class="col-md-4">
-		{{ form_row(form.model)}}
-	</div>
-</div>
-{{ form_row(form.title)}}
-{{ form_row(form.featuredImage)}}
-<div class="row">
-	<div class="col-md-4">
-		{{ form_row(form.price)}}
-	</div>
-	<div class="col-md-4">
-		{{ form_row(form.mileage)}}
-	</div>
-	<div class="col-md-4">
-		{{ form_row(form.releaseDate)}}
-	</div>
-</div>
-{# Features #}
-<fieldset>
-	<legend>Motorisation</legend>
-	<div class="row">
-		<div class="col-md-3">
+	<div class="col">
+		<div>
+			{{ form_row(form.mileage)}}
+		</div>
+		<div>
 			{{ form_row(form.fiscalPower)}}
 		</div>
-		<div class="col-md-3">
+		<div>
 			{{ form_row(form.power)}}
 		</div>
-		<div class="col-md-3">
+		<div>
 			{{ form_row(form.motorization)}}
 		</div>
-		<div class="col-md-3">
+		<div>
 			{{ form_row(form.engineDisplacement)}}
 		</div>
+		<div>{{ form_row(form.maxSpeed)}}</div>
 	</div>
-</fieldset>
-
-{{ form_row(form.consumption)}}
-{{ form_row(form.emissionRate)}}
-{{ form_row(form.energyClass)}}
-{{ form_row(form.color)}}
-
-<fieldset>
-	<legend>Poids et dimensions</legend>
-	<div class="row mb-3">
-		<div class="col-2">Dimensions</div>
-		<div class="col-2">
-			<div class="input-group">
-				<span class="input-group-text">L</span>
-				{{ form_widget(form.length)}}
-			</div>
+	<div class="col">
+		<div>
+			{{ form_row(form.featuredImage)}}
 		</div>
-		<div class="col-2">
 
-			<div class="input-group">
-				<span class="input-group-text">l</span>
-				{{ form_widget(form.width)}}
-			</div>
+		<div class="photos" data-index="{{ form.photos|length > 0 ? form.photos|last.vars.name + 1 : 0 }}" data-prototype="{{ form_widget(form.photos.vars.prototype)|e('html_attr') }}">
+			{{ form_widget(form.photos) }}
 		</div>
-		<div class="col-2">
-			<div class="input-group">
-				<span class="input-group-text">h</span>
-				{{ form_widget(form.height)}}</div>
+		<div class="text-end">
+			<button type="button" id="add-photo" class="btn btn-primary add_note_action" data-collection-holder-class="photos">Ajouter une photo</button>
+
 		</div>
 	</div>
-	<div class="row mb-3">
-		<div class="col-2">Poids</div>
-
-		<div class="col-2">
-			{{ form_widget(form.unloadedWeight)}}</div>
-		<div class="col-2">
-			{{ form_widget(form.totalWeight)}}</div>
-	</div>
-</fieldset>
-{{ form_row(form.maxSpeed)}}
-{{ form_row(form.numberOfDoors)}}
-
-<div class="photos" data-index="{{ form.photos|length > 0 ? form.photos|last.vars.name + 1 : 0 }}" data-prototype="{{ form_widget(form.photos.vars.prototype)|e('html_attr') }}">
-	{{ form_widget(form.photos) }}
+	<button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
 </div>
-<div class="text-end">
-	<button type="button" id="add-photo" class="btn btn-primary add_note_action" data-collection-holder-class="photos">Ajouter une photo</button>
-
-</div>
-<button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
 
 {{ form_end(form) }}
 {% block javascripts %}

@@ -36,37 +36,29 @@ class VehiclesType extends AbstractType
                     'C4' => 'C4'
                 ]
             ])
-            ->add('title', TextType::class, ['label' => 'Titre'])
-            // ->add('createdAt')
-            // ->add('updatedAt')
             ->add('releaseDate', null, ['label' => 'Année de mise en circulation'])
             ->add('price', IntegerType::class, ['label' => 'Prix'])
             ->add('featuredImage', TextType::class, ['label' => 'Image mise en avant'])
             ->add('mileage', IntegerType::class, ['label' => 'Kilométrage (kms)'])
-            ->add('fiscalPower', ChoiceType::class, ['label' => 'Puissance fiscale', 'choices' => [
-                '1' => 1, '2' => 2, '3' => 3, '4' => 4, '5' => 5, '6' => 6
-            ]],)
+            ->add('fiscalPower', ChoiceType::class, [
+                'label' => 'Puissance fiscale',
+                'choices' => [
+                    '4' => 4, '5' => 5, '6' => 6
+                ],
+            ],)
             // Features 
-            ->add('power', IntegerType::class, ['label' => 'Puissance (kWa)'])
-            ->add('motorization', ChoiceType::class, ['label' => 'Motorisation', 'choices' => ['Diesel' => 'diesel', 'Essence' => 'gazoline', 'Electrique' => 'electric']])
-            ->add('engineDisplacement', NumberType::class, ['label' => 'Cylindrée (cm3)'])
-            ->add('consumption', NumberType::class, ['label' => 'Consommation (l/100km)'])
-            ->add('emissionRate', IntegerType::class, ['label' => 'Emission (g CO2/km)'])
-            ->add('energyClass', TextType::class, ['required' => false,])
-            ->add('color', TextType::class, ['label' => 'Couleur'])
-            ->add('length', IntegerType::class, ['label' => 'Longueur', 'row_attr' => ['class' => 'test', 'id' => 'coucou']])
-            ->add('width', IntegerType::class, ['label' => 'Largeur',])
-            ->add('height', IntegerType::class, ['label' => 'Hauteur',])
-            ->add('unloadedWeight', IntegerType::class, ['label' => 'Poids à vide (kg)',])
-            ->add('totalWeight', IntegerType::class, ['label' => 'Poids total en charge (kg)',])
-            ->add('maxSpeed', IntegerType::class, ['label' => 'Vitesse maximale (km/h)',])
-            ->add('numberOfDoors', IntegerType::class, ['label' => 'Nombre de portes',])
+            ->add('power', IntegerType::class, ['label' => 'Puissance (kWa)', 'required' => false])
+            ->add('motorization', ChoiceType::class, ['label' => 'Motorisation', 'choices' => ['Diesel' => 'diesel', 'Essence' => 'gazoline', 'Electrique' => 'electric'], 'required' => false])
+            ->add('engineDisplacement', NumberType::class, ['label' => 'Cylindrée (cm3)', 'required' => false])
+
+            ->add('color', TextType::class, ['label' => 'Couleur', 'required' => false])
+            ->add('maxSpeed', IntegerType::class, ['label' => 'Vitesse maximale (km/h)', 'required' => false])
+            ->add('numberOfDoors', IntegerType::class, ['label' => 'Nombre de portes', 'required' => false])
             ->add(
                 'photos',
                 CollectionType::class,
                 [
                     'entry_type' => PhotoType::class,
-
                     'allow_add' => true,
                     'allow_delete' => true,
                     'by_reference' => false,
@@ -77,6 +69,15 @@ class VehiclesType extends AbstractType
                     },
                 ]
             );
+
+        // ->add('consumption', NumberType::class, ['label' => 'Consommation (l/100km)', 'required' => false])
+        // ->add('emissionRate', IntegerType::class, ['label' => 'Emission (g CO2/km)', 'required' => false])
+        // ->add('energyClass', TextType::class, ['required' => false,])
+        // ->add('length', IntegerType::class, ['label' => 'Longueur', 'row_attr' => ['class' => 'test', 'id' => 'coucou'], 'required' => false])
+        // ->add('width', IntegerType::class, ['label' => 'Largeur', 'required' => false])
+        // ->add('height', IntegerType::class, ['label' => 'Hauteur', 'required' => false])
+        // ->add('unloadedWeight', IntegerType::class, ['label' => 'Poids à vide (kg)', 'required' => false])
+        // ->add('totalWeight', IntegerType::class, ['label' => 'Poids total en charge (kg)', 'required' => false])
     }
 
     public function configureOptions(OptionsResolver $resolver): void

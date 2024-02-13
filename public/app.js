@@ -4,6 +4,7 @@ function addFormToCollection(e) {
         '.' + e.currentTarget.dataset.collectionHolderClass
     )
     const item = document.createElement('div')
+    item.classList.add('card')
 
     item.innerHTML = collectionHolder.dataset.prototype.replace(
         /__new_photo__/g,
