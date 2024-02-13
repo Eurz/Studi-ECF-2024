@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\VehiclesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -18,27 +20,27 @@ class Vehicle
     private ?string $id = null;
 
     #[ORM\Column(length: 50)]
-    // #[Assert\NotBlank()]
+    #[Assert\NotBlank()]
     private ?string $brandName = null;
 
 
     #[ORM\Column(length: 50)]
-    // #[Assert\NotBlank()]
+    #[Assert\NotBlank()]
     private ?string $model = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $title = null;
 
     #[ORM\Column]
-    // #[Assert\NotNull(message: 'createdAt')]
+    #[Assert\NotNull(message: 'createdAt')]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
-    // #[Assert\NotNull(message: 'updatedAt')]
+    #[Assert\NotNull(message: 'updatedAt')]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE)]
-    // #[Assert\NotNull(message: 'La date de mise en circulation est obligatoire')]
+    #[Assert\NotNull(message: 'La date de mise en circulation est obligatoire')]
     private ?\DateTimeImmutable $releaseDate = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 8, scale: 2, nullable: true)]
@@ -48,22 +50,22 @@ class Vehicle
     private ?string $featuredImage = null;
 
     #[ORM\Column(nullable: true)]
-    // #[Assert\PositiveOrZero()]
+    #[Assert\PositiveOrZero()]
     private ?int $mileage = null;
 
     #[ORM\Column]
-    // #[Assert\PositiveOrZero()]
+    #[Assert\PositiveOrZero()]
     private ?int $fiscalPower = null;
 
     #[ORM\Column(nullable: true)]
-    // #[Assert\PositiveOrZero()]
+    #[Assert\PositiveOrZero()]
     private ?int $power = null;
 
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $motorization = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 4, scale: 1, nullable: true)]
-    // #[Assert\PositiveOrZero()]
+    #[Assert\PositiveOrZero()]
     private ?string $consumption = null;
 
     #[ORM\Column(nullable: true)]
@@ -77,7 +79,7 @@ class Vehicle
     private ?string $color = null;
 
     #[ORM\Column(nullable: true)]
-    // #[Assert\PositiveOrZero()]
+    #[Assert\PositiveOrZero()]
     private ?int $length = null;
 
     #[ORM\Column(nullable: true)]
@@ -96,16 +98,20 @@ class Vehicle
     private ?int $maxSpeed = null;
 
     #[ORM\Column(nullable: true)]
-    // #[Assert\PositiveOrZero()]
+    #[Assert\PositiveOrZero()]
     private ?int $numberOfDoors = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 3, scale: 1, nullable: true)]
     private ?int $engineDisplacement = null;
 
+    #[ORM\OneToMany(mappedBy: 'vehicle', targetEntity: Photo::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    private Collection $photos;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
+        $this->photos = new ArrayCollection();
     }
 
     #[ORM\PrePersist]
@@ -412,5 +418,40 @@ class Vehicle
         $this->engineDisplacement = $engineDisplacement;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Photo>
+     */
+    public function getPhotos(): Collection
+    {
+        return $this->photos;
+    }
+
+    public function addPhoto(Photo $photo): static
+    {
+        if (!$this->photos->contains($photo)) {
+            $this->photos->add($photo);
+            $photo->setVehicle($this);
+        }
+
+        return $this;
+    }
+
+    public function removePhoto(Photo $photo): static
+    {
+        if ($this->photos->removeElement($photo)) {
+            // set the owning side to null (unless already changed)
+            if ($photo->getVehicle() === $this) {
+                $photo->setVehicle(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function toArray(): array
+    {
+        return ['id' => $this->id, 'brandName' => $this->brandName];
     }
 }

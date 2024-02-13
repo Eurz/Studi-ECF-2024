@@ -82,6 +82,16 @@
 {{ form_row(form.maxSpeed)}}
 {{ form_row(form.numberOfDoors)}}
 
+<div class="photos" data-index="{{ form.photos|length > 0 ? form.photos|last.vars.name + 1 : 0 }}" data-prototype="{{ form_widget(form.photos.vars.prototype)|e('html_attr') }}">
+	{{ form_widget(form.photos) }}
+</div>
+<div class="text-end">
+	<button type="button" id="add-photo" class="btn btn-primary add_note_action" data-collection-holder-class="photos">Ajouter une photo</button>
+
+</div>
 <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
 
 {{ form_end(form) }}
+{% block javascripts %}
+	<script defer src="{{ asset('app.js') }}"></script>
+{% endblock %}

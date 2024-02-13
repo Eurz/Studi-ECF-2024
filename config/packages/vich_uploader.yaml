@@ -12,3 +12,12 @@ vich_uploader:
             inject_on_load: false
             delete_on_update: true
             delete_on_remove: true
+
+        vehicle_photo:
+            uri_prefix: /uploads/images/vehicles
+            upload_destination: '%kernel.project_dir%/public/uploads/images/vehicles'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true

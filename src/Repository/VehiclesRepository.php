@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Vehicle;
 use App\Entity\Vehicles;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -22,6 +23,38 @@ class VehiclesRepository extends ServiceEntityRepository
         parent::__construct($registry, Vehicle::class);
     }
 
+
+    public function findVehiclesFiltered($filters)
+    {
+        $query = $this->createQueryBuilder('v');
+        if ($filters['minPrice'] !== "") {
+            $query = $query
+                ->andWhere('v.price >= :minPrice')
+                ->setParameter('minPrice', $filters['minPrice']);
+        }
+        if ($filters['maxPrice'] !== "") {
+            $query = $query
+                ->andWhere('v.price <= :maxPrice')
+                ->setParameter('maxPrice', $filters['maxPrice']);
+        }
+        if ($filters['minMileage'] !== "") {
+            $query = $query
+                ->andWhere('v.mileage >= :minMileage')
+                ->setParameter('minMileage', $filters['minMileage']);
+        }
+        if ($filters['maxMileage'] !== "") {
+            $query = $query
+                ->andWhere('v.mileage <= :maxMileage')
+                ->setParameter('maxMileage', $filters['maxMileage']);
+        }
+
+        $vehicles = $query
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult(AbstractQuery::HYDRATE_ARRAY);
+        // ->orderBy('v.id', 'ASC');
+        return $vehicles;
+    }
     //    /**
     //     * @return Vehicles[] Returns an array of Vehicles objects
     //     */

@@ -2,10 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\Photo;
 use App\Entity\Vehicle;
-use Doctrine\ORM\Mapping\Id;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -59,7 +60,23 @@ class VehiclesType extends AbstractType
             ->add('unloadedWeight', IntegerType::class, ['label' => 'Poids à vide (kg)',])
             ->add('totalWeight', IntegerType::class, ['label' => 'Poids total en charge (kg)',])
             ->add('maxSpeed', IntegerType::class, ['label' => 'Vitesse maximale (km/h)',])
-            ->add('numberOfDoors', IntegerType::class, ['label' => 'Nombre de portes',]);
+            ->add('numberOfDoors', IntegerType::class, ['label' => 'Nombre de portes',])
+            ->add(
+                'photos',
+                CollectionType::class,
+                [
+                    'entry_type' => PhotoType::class,
+
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'by_reference' => false,
+                    'prototype' => true,
+                    'prototype_name' => '__new_photo__',
+                    'delete_empty' => function (Photo $photo) {
+                        return $photo->getImageFile() === null;
+                    },
+                ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver): void
