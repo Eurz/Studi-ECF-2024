@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Témoignages clients
+{% endblock %}
+
+{% block body %}
+	<h1>{{ pageTitle}}</h1>
+
+	{% for testimonial in testimonials %}
+
+		<div class="card mb-3">
+			<div class="card-body">
+				<h5 class="card-title">{{ testimonial.title }}
+				</h5>
+				<p class="card-text">{{ testimonial.comment }}</p>
+				<p class="card-text">Par
+					<span>{{ testimonial.userName }}</span>
+				</p>
+			</div>
+		</div>
+
+	{% endfor %}
+
+	{{ form_start(form) }}
+
+	<div class="">
+		<div class="mb-3">
+			{{ form_row(form.userName)}}
+		</div>
+		<div class="mb-3">
+			{{ form_row(form.title)}}
+		</div>
+		<div class="mb-3">
+			{{ form_row(form.comment)}}
+		</div>
+		<div>
+			<button class="btn btn-primary">Envoyer</button>
+		</div>
+	</div>
+	{{ form_end(form) }}
+
+{% endblock %}

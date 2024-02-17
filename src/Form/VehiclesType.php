@@ -61,6 +61,10 @@ class VehiclesType extends AbstractType
                 'label' => 'Puissance fiscale',
                 'choices' => ['4' => 4, '5' => 5, '6' => 6, '7' => 7],
                 'placeholder' => '--- Choix ---',
+                // 'placeholder_attr' => [
+                //     ['title' => 'Choose an option'],
+                // ],
+
             ])
             // Features 
             ->add('power', NumberType::class, ['label' => 'Puissance (kWa)', 'required' => false])

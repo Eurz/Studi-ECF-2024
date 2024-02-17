@@ -5,56 +5,31 @@ namespace App\Entity;
 use App\Repository\TestimonialsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TestimonialsRepository::class)]
-#[UniqueEntity('slug', 'Cet email existe déjà au sein de l\'application.')]
-#[ORM\HasLifecycleCallbacks]
-class Testimonials
+class Testimonial
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue('CUSTOM')]
-    #[ORM\Column(type: 'uuid', unique: true)]
-    #[ORM\CustomIdGenerator('doctrine.uuid_generator')]
-    private ?string $id = null;
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank()]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Assert\NotBlank()]
     private ?string $comment = null;
 
-    #[ORM\Column]
-    private ?bool $is_published = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $createdAt = null;
+
+    #[ORM\Column(length: 100)]
+    private ?string $userName = null;
 
     #[ORM\Column]
-    #[Assert\NotNull()]
-    private ?\DateTimeImmutable $createdAt = null;
+    private ?bool $isPublished = null;
 
-    #[ORM\Column]
-    #[Assert\NotNull()]
-    private ?\DateTimeImmutable $updatedAt = null;
-
-    #[ORM\Column]
-    #[Assert\PositiveOrZero()]
-    private ?int $score = null;
-
-    #[ORM\PrePersist]
-    public function prePersist()
-    {
-        $this->createdAt = new \DateTimeImmutable();
-    }
-
-    #[ORM\PreUpdate]
-    public function preUpdate()
-    {
-        $this->updatedAt = new \DateTimeImmutable();
-    }
-
-    public function getId(): ?string
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -83,50 +58,38 @@ class Testimonials
         return $this;
     }
 
-    public function isIsPublished(): ?bool
-    {
-        return $this->is_published;
-    }
-
-    public function setIsPublished(bool $is_published): static
-    {
-        $this->is_published = $is_published;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    public function setCreatedAt(\DateTimeInterface $createdAt): static
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function getUserName(): ?string
     {
-        return $this->updatedAt;
+        return $this->userName;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
+    public function setUserName(string $userName): static
     {
-        $this->updatedAt = $updatedAt;
+        $this->userName = $userName;
 
         return $this;
     }
 
-    public function getScore(): ?int
+    public function isIsPublished(): ?bool
     {
-        return $this->score;
+        return $this->isPublished;
     }
 
-    public function setScore(int $score): static
+    public function setIsPublished(bool $isPublished): static
     {
-        $this->score = $score;
+        $this->isPublished = $isPublished;
 
         return $this;
     }
