@@ -4,71 +4,79 @@
 
 {% block body %}
 	<a href="{{ path('vehicles_index') }}">Retour</a>
-
-	<div>Véhicule ajouté le{{vehicle.createdAt|date('d/m/Y', timezone="Europe/Paris") }}</div>
+	<h1>{{ vehicle.brandName }}
+		{{ vehicle.model}}</h1>
 	<div class="row">
+		<div class="col"><img src="{{ asset('uploads/images/default.png') }}" class="card-img-top img-fluid" alt="{{vehicle.brandName}}"></div>
 		<div class="col">
-			<h1>{{ vehicle.brandName }}
-				{{ vehicle.model}}</h1>
-			<div>{{ vehicle.engineDisplacement}}
-				{{vehicle.color}}</div>
-			<div>{{vehicle.price }}
-				€ TTC</div>
-		</div>
-		<div class="col-sm-4">
-			<h3>Options</h3>
-
-		</div>
-	</div>
-	<div class="row">
-		<div class="col">
-			<div class="row row-cols-2">
-				<div class="col">Puiss. :{{ vehicle.power}}
-					kW ({{ vehicle.fiscalPower}}
-					ch)
+			<div>
+				<div>Véhicule ajouté le{{vehicle.createdAt|date('d/m/Y', timezone="Europe/Paris") }}</div>
+				<div class="d-flex">
+					<div class="fw-bold w-50">Price</div>
+					<div>{{ vehicle.price }}
+						€ TTC</div>
 				</div>
-				<div class="col">Année :
-					{{ vehicle.releaseDate|date('Y', timezone="Europe/Paris")}}</div>
-				<div class="col">Moteur :
-					{{ vehicle.motorization}}
-					(
-					{{vehicle.engineDisplacement}}
-					) cm3</div>
-				<div class="col">Kilométrage:
-					{{ vehicle.mileage}}
-					kms</div>
-				<div class="col">
-					Conso :
-					{{ vehicle.consumption}}
-					l/100km</div>
-				<div class="col">
-					Emission :
-					{{ vehicle.emissionRate}}
-					g CO2/km (Class :
-					{{ vehicle.energyClass}})</div>
-				<div class="col">
-					Vitesse max. :{{vehicle.maxSpeed}}
-					{{vehicle.numberOfDoors}}
-					portes
+				<div class="d-flex">
+					<div class="fw-bold w-50">Kilométrage</div>
+					<div>{{ vehicle.mileage}}
+						kms</div>
+				</div>
+				<div class="d-flex">
+					<div class="fw-bold w-50">Année</div>
+					<div>{{ vehicle.releaseDate|date('Y', timezone="Europe/Paris")}}</div>
+				</div>
+				<div class="d-flex">
+					<div class="fw-bold w-50">Année</div>
+					<div>{{ vehicle.releaseDate|date('Y', timezone="Europe/Paris")}}</div>
+				</div>
+				<div class="d-flex">
+					<div class="fw-bold w-50">Puiss. :
+
+					</div>
+					<div>
+						{{ vehicle.power }}
+						kW ({{ vehicle.fiscalPower}}
+						ch)
+					</div>
+				</div>
+				<div class="d-flex">
+					<div class="fw-bold w-50">Moteur :</div>
+					<div>
+						{{ vehicle.motorization}}
+						(
+						{{vehicle.engineDisplacement}}
+						) cm3</div>
+				</div>
+				<div class="d-flex">
+					<div class="fw-bold w-50">
+						Conso :</div>
+					<div>
+						{{ vehicle.consumption}}
+						l/100km</div>
+				</div>
+				<div class="d-flex">
+					<div class="fw-bold w-50">Vitesse max. :</div>
+					<div>{{vehicle.maxSpeed}}</div>
+				</div>
+				<div class="d-flex">
+					<div class="fw-bold w-50">Portes :</div>
+					<div>{{ vehicle.numberOfDoors}}
+					</div>
 				</div>
 			</div>
+
 		</div>
 		<div class="col">
-			Dimensions
-			<div>
-				Largeur :
-				{{ vehicle.width}}</div>
-			<div>Longueur :
-				{{vehicle.length}}</div>
-			<div>Hauteur{{ vehicle.height}}</div>
-		</div>
-		<div class="col">
-			Poids
-			<div>
-				A vide :
-				{{ vehicle.unloadedWeight}}</div>
-			<div>En charge :
-				{{vehicle.totalWeight}}</div>
+			<div class="d-flex">
+				<div class="fw-bold w-50">Equipements :</div>
+				<div>{{ vehicle.numberOfDoors}}
+				</div>
+			</div>
+			<div class="d-flex">
+				<div class="fw-bold w-50">Options :</div>
+				<div>{{ vehicle.numberOfDoors}}
+				</div>
+			</div>
 		</div>
 	</div>
 {% endblock %}

@@ -5,10 +5,17 @@
 {% endblock %}
 
 {% block body %}
-
+	<div><img src="{{ asset('./images/hero-banner.jpg')}}" class="img-fluid" alt="..."></div>
 	<h1>{{page_title}}</h1>
-
-	<div class="row row-cols-1 row-cols-md-3 g-4">
+	<div class="d-flex justify-content-between">
+		<div class="">
+			<h2>Nos services</h2>
+		</div>
+		<div>
+			<a href="{{ path('services_index') }}" class="btn btn-primary">Découvrir nos services</a>
+		</div>
+	</div>
+	<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 		{% for service in services %}
 
 			<div class="col">

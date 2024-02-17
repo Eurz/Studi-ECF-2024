@@ -1,4 +1,4 @@
-<div class="card border-0 h-100">
+<div class="card border-0  h-100">
 	{% if service.imageName %}
 		<img src="{{ vich_uploader_asset(service) }}" class="card-img-top img-fluid" alt="{{service.title}}">
 	{% else %}
@@ -7,6 +7,8 @@
 	<div class="card-body">
 		<h2 class="card-title">{{ service.title }}</h2>
 		<p class="card-text">{{ service.excerpt }}</p>
+	</div>
+	<div class="card-footer bg-transparent text-end border-0">
 		<a href="{{ path('services_view', {'slug': service.slug}) }}" class="btn btn-primary">Découvrir</a>
 	</div>
 </div>

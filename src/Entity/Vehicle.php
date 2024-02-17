@@ -40,7 +40,7 @@ class Vehicle
     #[Assert\NotNull(message: 'La date de mise en circulation est obligatoire')]
     private ?\DateTimeImmutable $releaseDate = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 8, scale: 2, nullable: true)]
+    #[ORM\Column(nullable: true)]
     private ?int $price = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -103,11 +103,15 @@ class Vehicle
     #[ORM\OneToMany(mappedBy: 'vehicle', targetEntity: Photo::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $photos;
 
+    #[ORM\ManyToMany(targetEntity: Equipments::class, cascade: ['persist', 'remove'])]
+    private Collection $equipments;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
         $this->photos = new ArrayCollection();
+        $this->equipments = new ArrayCollection();
     }
 
     #[ORM\PrePersist]
@@ -449,5 +453,29 @@ class Vehicle
     public function toArray(): array
     {
         return ['id' => $this->id, 'brandName' => $this->brandName];
+    }
+
+    /**
+     * @return Collection<int, Equipments>
+     */
+    public function getEquipments(): Collection
+    {
+        return $this->equipments;
+    }
+
+    public function addEquipment(Equipments $equipment): static
+    {
+        if (!$this->equipments->contains($equipment)) {
+            $this->equipments->add($equipment);
+        }
+
+        return $this;
+    }
+
+    public function removeEquipment(Equipments $equipment): static
+    {
+        $this->equipments->removeElement($equipment);
+
+        return $this;
     }
 }

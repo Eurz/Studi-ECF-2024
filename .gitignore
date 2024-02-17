@@ -10,4 +10,5 @@
 /commandes.txt
 /public/uploads
 /migrations
+/docs
 ###< symfony/framework-bundle ###

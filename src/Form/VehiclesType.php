@@ -2,8 +2,12 @@
 
 namespace App\Form;
 
+use App\Entity\Equipments;
 use App\Entity\Photo;
 use App\Entity\Vehicle;
+use App\Repository\EquipmentsRepository;
+use Doctrine\ORM\QueryBuilder;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -67,6 +71,24 @@ class VehiclesType extends AbstractType
                     'delete_empty' => function (Photo $photo) {
                         return $photo->getImageFile() === null;
                     },
+                ]
+            )
+            ->add(
+                'equipments',
+                EntityType::class,
+                [
+                    'class' => Equipments::class,
+                    'choice_label' => 'name',
+                    'multiple' => true,
+                    'expanded' => false,
+                    'empty_data' => null,
+                    // 'query_builder' => function (EquipmentsRepository $equipmentsRepository): QueryBuilder {
+                    //     return $equipmentsRepository->createQueryBuilder('e')
+                    //         ->where('e.isOption :isOption')
+                    //         ->setParameter('isOption', 0)
+                    //         ->orderBy('e.name', 'ASC');
+                    // },
+                    // 'help' => 'You must choose at least one technician'
                 ]
             );
 
