@@ -20,23 +20,27 @@
 		</div>
 
 	{% endfor %}
+	<div class="row">
+		<div class="col-md-12 col-lg-8">
+			{{ form_start(form)  }}
+			<fieldset>
+				<legend>Ajouter un Commentaire</legend>
+				<div class="mb-3">
+					{{ form_row(form.userName)}}
+				</div>
+				<div class="mb-3">
+					{{ form_row(form.title)}}
+				</div>
+				<div class="mb-3">
+					{{ form_row(form.comment)}}
+				</div>
+				<div>
+					<button class="btn btn-primary">Envoyer</button>
+				</div>
+			</fieldset>
+			{{ form_end(form) }}
+		</div>
 
-	{{ form_start(form) }}
-
-	<div class="">
-		<div class="mb-3">
-			{{ form_row(form.userName)}}
-		</div>
-		<div class="mb-3">
-			{{ form_row(form.title)}}
-		</div>
-		<div class="mb-3">
-			{{ form_row(form.comment)}}
-		</div>
-		<div>
-			<button class="btn btn-primary">Envoyer</button>
-		</div>
 	</div>
-	{{ form_end(form) }}
 
 {% endblock %}

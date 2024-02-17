@@ -50,8 +50,8 @@ class VehiclesType extends AbstractType
                 // 'input' => 'string '
             ])
             ->add('price', NumberType::class, ['label' => 'Prix'])
-            ->add('featuredImage', EntityType::class, [
-                'class' => Photo::class,
+            ->add('featuredImage', TextType::class, [
+                // 'class' => Photo::class,
                 'label' => 'Image mise en avant',
 
 

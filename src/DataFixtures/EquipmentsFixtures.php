@@ -4,10 +4,11 @@ namespace App\DataFixtures;
 
 use App\Entity\Equipments as EntityEquipments;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;;
 
-class EquipmentsFixtures extends Fixture
+class EquipmentsFixtures extends Fixture implements FixtureGroupInterface
 {
     public function load(ObjectManager $manager): void
     {
@@ -46,5 +47,10 @@ class EquipmentsFixtures extends Fixture
             $manager->persist($equipment);
         }
         $manager->flush();
+    }
+
+    public static function getGroups(): array
+    {
+        return ['equipments'];
     }
 }
