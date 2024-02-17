@@ -11,7 +11,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -40,24 +40,45 @@ class VehiclesType extends AbstractType
                     'C4' => 'C4'
                 ]
             ])
-            ->add('releaseDate', null, ['label' => 'Année de mise en circulation'])
-            ->add('price', IntegerType::class, ['label' => 'Prix'])
-            ->add('featuredImage', TextType::class, ['label' => 'Image mise en avant'])
-            ->add('mileage', IntegerType::class, ['label' => 'Kilométrage (kms)'])
+            ->add('releaseDate', DateType::class, [
+                'label' => 'Année de mise en circulation',
+                'format' => 'ddMMyyyy',
+                'view_timezone' => 'Europe/Paris',
+                'widget' => 'choice',
+                'years' => range(1980, 2024)
+                // 'html5' => false
+                // 'input' => 'string '
+            ])
+            ->add('price', NumberType::class, ['label' => 'Prix'])
+            ->add('featuredImage', EntityType::class, [
+                'class' => Photo::class,
+                'label' => 'Image mise en avant',
+
+
+            ])
+            ->add('mileage', NumberType::class, ['label' => 'Kilométrage (kms)'])
             ->add('fiscalPower', ChoiceType::class, [
                 'label' => 'Puissance fiscale',
-                'choices' => [
-                    '4' => 4, '5' => 5, '6' => 6
-                ],
-            ],)
+                'choices' => ['4' => 4, '5' => 5, '6' => 6, '7' => 7],
+                'placeholder' => '--- Choix ---',
+            ])
             // Features 
-            ->add('power', IntegerType::class, ['label' => 'Puissance (kWa)', 'required' => false])
-            ->add('motorization', ChoiceType::class, ['label' => 'Motorisation', 'choices' => ['Diesel' => 'diesel', 'Essence' => 'gazoline', 'Electrique' => 'electric'], 'required' => false])
+            ->add('power', NumberType::class, ['label' => 'Puissance (kWa)', 'required' => false])
+            ->add('motorization', ChoiceType::class, [
+                'label' => 'Motorisation',
+                'placeholder' => '--- Choix ---',
+                'choices' => ['Diesel' => 'diesel', 'Essence' => 'gazoline', 'Electrique' => 'electric'], 'required' => false
+            ])
             ->add('engineDisplacement', NumberType::class, ['label' => 'Cylindrée (cm3)', 'required' => false])
 
             ->add('color', TextType::class, ['label' => 'Couleur', 'required' => false])
-            ->add('maxSpeed', IntegerType::class, ['label' => 'Vitesse maximale (km/h)', 'required' => false])
-            ->add('numberOfDoors', IntegerType::class, ['label' => 'Nombre de portes', 'required' => false])
+            ->add('maxSpeed', NumberType::class, ['label' => 'Vitesse maximale (km/h)', 'required' => false])
+            ->add('numberOfDoors', ChoiceType::class, [
+                'label' => 'Nombre de portes',
+                'choices' => ['3' => 3, '5' => 5, '7' => 7],
+                'placeholder' => '--- Choix ---',
+                'required' => false
+            ])
             ->add(
                 'photos',
                 CollectionType::class,
@@ -78,28 +99,48 @@ class VehiclesType extends AbstractType
                 EntityType::class,
                 [
                     'class' => Equipments::class,
+                    'required' => false,
                     'choice_label' => 'name',
                     'multiple' => true,
-                    'expanded' => false,
+                    'expanded' => true,
                     'empty_data' => null,
-                    // 'query_builder' => function (EquipmentsRepository $equipmentsRepository): QueryBuilder {
-                    //     return $equipmentsRepository->createQueryBuilder('e')
-                    //         ->where('e.isOption :isOption')
-                    //         ->setParameter('isOption', 0)
-                    //         ->orderBy('e.name', 'ASC');
-                    // },
+                    'query_builder' => function (EquipmentsRepository $equipmentsRepository): QueryBuilder {
+                        return $equipmentsRepository->createQueryBuilder('e')
+                            ->where('e.is_option = :isOption')
+                            ->setParameter('isOption', 0)
+                            ->orderBy('e.name', 'ASC');
+                    },
+                    // 'help' => 'You must choose at least one technician'
+                ]
+            )
+            ->add(
+                'options',
+                EntityType::class,
+                [
+                    'class' => Equipments::class,
+                    'choice_label' => 'name',
+                    'required' => false,
+                    'multiple' => true,
+                    'expanded' => true,
+                    'empty_data' => null,
+                    'query_builder' => function (EquipmentsRepository $optionsRepository): QueryBuilder {
+                        return $optionsRepository->createQueryBuilder('e')
+                            ->where('e.is_option = :isOption')
+                            ->setParameter('isOption', 1)
+                            ->orderBy('e.name', 'ASC');
+                    },
                     // 'help' => 'You must choose at least one technician'
                 ]
             );
 
         // ->add('consumption', NumberType::class, ['label' => 'Consommation (l/100km)', 'required' => false])
-        // ->add('emissionRate', IntegerType::class, ['label' => 'Emission (g CO2/km)', 'required' => false])
+        // ->add('emissionRate', NumberType::class, ['label' => 'Emission (g CO2/km)', 'required' => false])
         // ->add('energyClass', TextType::class, ['required' => false,])
-        // ->add('length', IntegerType::class, ['label' => 'Longueur', 'row_attr' => ['class' => 'test', 'id' => 'coucou'], 'required' => false])
-        // ->add('width', IntegerType::class, ['label' => 'Largeur', 'required' => false])
-        // ->add('height', IntegerType::class, ['label' => 'Hauteur', 'required' => false])
-        // ->add('unloadedWeight', IntegerType::class, ['label' => 'Poids à vide (kg)', 'required' => false])
-        // ->add('totalWeight', IntegerType::class, ['label' => 'Poids total en charge (kg)', 'required' => false])
+        // ->add('length', NumberType::class, ['label' => 'Longueur', 'row_attr' => ['class' => 'test', 'id' => 'coucou'], 'required' => false])
+        // ->add('width', NumberType::class, ['label' => 'Largeur', 'required' => false])
+        // ->add('height', NumberType::class, ['label' => 'Hauteur', 'required' => false])
+        // ->add('unloadedWeight', NumberType::class, ['label' => 'Poids à vide (kg)', 'required' => false])
+        // ->add('totalWeight', NumberType::class, ['label' => 'Poids total en charge (kg)', 'required' => false])
     }
 
     public function configureOptions(OptionsResolver $resolver): void

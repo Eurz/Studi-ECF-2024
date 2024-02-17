@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinTable;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: VehiclesRepository::class)]
@@ -36,22 +37,20 @@ class Vehicle
     #[Assert\NotNull(message: 'updatedAt')]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\NotNull(message: 'La date de mise en circulation est obligatoire')]
-    private ?\DateTimeImmutable $releaseDate = null;
+    private ?\DateTimeInterface $releaseDate = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $price = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $featuredImage = null;
-
     #[ORM\Column(nullable: true)]
-    #[Assert\PositiveOrZero()]
     private ?int $mileage = null;
 
+    #[ORM\Column(length: 20, nullable: true)]
+    private ?string $color = null;
+
     #[ORM\Column()]
-    #[Assert\PositiveOrZero()]
     private ?int $fiscalPower = null;
 
     #[ORM\Column(nullable: true)]
@@ -61,7 +60,6 @@ class Vehicle
     private ?string $motorization = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 4, scale: 1, nullable: true)]
-    #[Assert\PositiveOrZero()]
     private ?string $consumption = null;
 
     // #[ORM\Column(nullable: true)]
@@ -70,9 +68,6 @@ class Vehicle
 
     // #[ORM\Column(length: 1, nullable: true)]
     // private ?string $energyClass = null;
-
-    #[ORM\Column(length: 20, nullable: true)]
-    private ?string $color = null;
 
     // #[ORM\Column(nullable: true)]
     // #[Assert\PositiveOrZero()]
@@ -97,14 +92,22 @@ class Vehicle
     #[Assert\PositiveOrZero()]
     private ?int $numberOfDoors = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 3, scale: 1, nullable: true)]
+    #[ORM\Column(type: Types::INTEGER, nullable: true)]
     private ?int $engineDisplacement = null;
 
     #[ORM\OneToMany(mappedBy: 'vehicle', targetEntity: Photo::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $photos;
 
-    #[ORM\ManyToMany(targetEntity: Equipments::class, cascade: ['persist', 'remove'])]
+    #[ORM\ManyToMany(targetEntity: Equipments::class)]
     private Collection $equipments;
+
+    #[ORM\ManyToMany(targetEntity: Equipments::class)]
+    #[JoinTable(name: 'vehicle_options')]
+    private Collection $options;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Photo $featuredImage = null;
 
     public function __construct()
     {
@@ -112,6 +115,7 @@ class Vehicle
         $this->updatedAt = new \DateTimeImmutable();
         $this->photos = new ArrayCollection();
         $this->equipments = new ArrayCollection();
+        $this->options = new ArrayCollection();
     }
 
     #[ORM\PrePersist]
@@ -192,12 +196,13 @@ class Vehicle
         return $this;
     }
 
-    public function getReleaseDate(): ?\DateTimeImmutable
+
+    public function getReleaseDate(): ?\DateTimeInterface
     {
         return $this->releaseDate;
     }
 
-    public function setReleaseDate(\DateTimeImmutable $releaseDate): static
+    public function setReleaseDate(\DateTimeInterface $releaseDate): static
     {
         $this->releaseDate = $releaseDate;
 
@@ -216,17 +221,6 @@ class Vehicle
         return $this;
     }
 
-    public function getFeaturedImage(): ?string
-    {
-        return $this->featuredImage;
-    }
-
-    public function setFeaturedImage(string $featuredImage): static
-    {
-        $this->featuredImage = $featuredImage;
-
-        return $this;
-    }
 
     public function getMileage(): ?int
     {
@@ -475,6 +469,42 @@ class Vehicle
     public function removeEquipment(Equipments $equipment): static
     {
         $this->equipments->removeElement($equipment);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Equipments>
+     */
+    public function getOptions(): Collection
+    {
+        return $this->options;
+    }
+
+    public function addOption(Equipments $option): static
+    {
+        if (!$this->options->contains($option)) {
+            $this->options->add($option);
+        }
+
+        return $this;
+    }
+
+    public function removeOption(Equipments $option): static
+    {
+        $this->options->removeElement($option);
+
+        return $this;
+    }
+
+    public function getFeaturedImage(): ?Photo
+    {
+        return $this->featuredImage;
+    }
+
+    public function setFeaturedImage(Photo $featuredImage): static
+    {
+        $this->featuredImage = $featuredImage;
 
         return $this;
     }

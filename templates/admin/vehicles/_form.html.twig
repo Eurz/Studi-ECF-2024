@@ -36,7 +36,15 @@
 			{{ form_row(form.engineDisplacement)}}
 		</div>
 		<div>{{ form_row(form.maxSpeed)}}</div>
+
 	</div>
+
+	<div class="col">
+		<div>{{ form_row(form.equipments)}}</div>
+		<div>{{ form_row(form.options)}}</div>
+	</div>
+</div>
+<div class="row">
 	<div class="col">
 		<div>
 			{{ form_row(form.featuredImage)}}
@@ -47,9 +55,10 @@
 		</div>
 		<div class="text-end">
 			<button type="button" id="add-photo" class="btn btn-primary add_note_action" data-collection-holder-class="photos">Ajouter une photo</button>
-
 		</div>
 	</div>
+</div>
+<div>
 	<button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
 </div>
 
