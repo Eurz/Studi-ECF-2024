@@ -34,7 +34,7 @@ class TestimonialsType extends AbstractType
         if ($options['isAdmin']) {
             $builder = $builder->add('isPublished', ChoiceType::class, [
                 'label' => 'Etat',
-                'choices' => ['Brouillon' => 0, 'Publié' => 1]
+                'choices' => ['Non validé' => 0, 'Validé' => 1]
             ]);
         }
     }

@@ -25,7 +25,9 @@
 			<tbody>
 				{% for service in services %}
 					<tr>
-						<td>{{ service.title }}</td>
+						<td>
+							<a href="{{ path('admin_services_edit', {'slug': service.slug}) }}">{{ service.title }}</a>
+						</td>
 						<td>{{ service.excerpt }}</td>
 						{# <td>{{ service.createdAt ? service.createdAt|date('Y-m-d H:i:s') : '' }}</td> #}
 						{# <td>{{ service.updatedAt ? service.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
@@ -33,9 +35,6 @@
 						<td>{{ service.slug }}</td>
 
 						<td>
-							<a href="{{ path('admin_services_edit', {'slug': service.slug}) }}" class="btn btn-sm btn-primary">
-								<span data-feather="edit">Editer</span>
-							</a>
 							{{ include('admin/services/_delete_form.html.twig') }}
 
 						</td>

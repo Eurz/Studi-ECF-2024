@@ -27,6 +27,13 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
         $admin2->setPassword('$2y$13$IPb6x8AKXKQpcknAATKD/ehc5aqBgHe0a7hEQgMjWKQmSAeCPViJm');
         $admin2->setRoles(['ROLE_ADMIN']);
         $manager->persist($admin2);
+
+        // Employee: employee@employee.com/employee
+        $employee = new User();
+        $employee->setEmail('employee@employee.com');
+        $employee->setPassword('$2y$13$bw2.cXrDKR86PsjrGy8jIeG7bNrZROublrWIjLd9wvPASC8OT5q7O');
+        $employee->setRoles(['ROLE_EMPLOYEE']);
+        $manager->persist($employee);
         $manager->flush();
     }
 
