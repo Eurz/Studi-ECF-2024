@@ -6,7 +6,7 @@ use App\Entity\Equipments as EntityEquipments;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
-use Faker\Factory;;
+use Faker\Factory;
 
 class EquipmentsFixtures extends Fixture implements FixtureGroupInterface
 {

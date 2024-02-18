@@ -18,7 +18,7 @@ class PhotoType extends AbstractType
         $builder
             ->add('imageFile', VichImageType::class, [
                 'label' => false,
-                'required' => false,
+                // 'required' => false,
                 'allow_delete' => true,
                 'delete_label' => 'Supprimer',
                 'download_label' => true,
@@ -26,14 +26,7 @@ class PhotoType extends AbstractType
                 'image_uri' => true,
                 // 'imagine_pattern' => '...',
                 'asset_helper' => true,
-            ])
-            // ->add('imageSize')
-            // ->add('mimeType')
-            // ->add('vehicle', EntityType::class, [
-            //     'class' => Vehicle::class,
-            //     'choice_label' => 'id',
-            // ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

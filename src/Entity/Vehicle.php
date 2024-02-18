@@ -21,12 +21,12 @@ class Vehicle
     private ?string $id = null;
 
     #[ORM\Column(length: 50)]
-    #[Assert\NotBlank()]
+    #[Assert\NotBlank(message: 'Le titre est requis')]
     private ?string $brandName = null;
 
 
     #[ORM\Column(length: 50)]
-    #[Assert\NotBlank()]
+    #[Assert\NotBlank(message: 'Le modèle est requis')]
     private ?string $model = null;
 
     #[ORM\Column]
@@ -50,7 +50,7 @@ class Vehicle
     #[ORM\Column(length: 20, nullable: true)]
     private ?string $color = null;
 
-    #[ORM\Column()]
+    #[ORM\Column(nullable: true)]
     private ?int $fiscalPower = null;
 
     #[ORM\Column(nullable: true)]

@@ -37,7 +37,8 @@ class ServicesType extends AbstractType
                     'label' => 'Image à la une',
                     'required' => false,
                     'allow_delete' => true,
-                    'attr' => []
+                    'attr' => [],
+                    'by_reference' => false
                     // 'download_label' => static fn (Services $service): string => $service->getTitle(),
                     // 'imagine_pattern' => 'service_photo_320x240'
                 ]

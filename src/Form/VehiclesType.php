@@ -50,11 +50,9 @@ class VehiclesType extends AbstractType
                 // 'input' => 'string '
             ])
             ->add('price', NumberType::class, ['label' => 'Prix'])
-            ->add('featuredImage', TextType::class, [
-                // 'class' => Photo::class,
+            ->add('featuredImage', PhotoType::class, [
                 'label' => 'Image mise en avant',
-
-
+                // 'by_reference' => false
             ])
             ->add('mileage', NumberType::class, ['label' => 'Kilométrage (kms)'])
             ->add('fiscalPower', ChoiceType::class, [
@@ -105,6 +103,7 @@ class VehiclesType extends AbstractType
                     'class' => Equipments::class,
                     'required' => false,
                     'choice_label' => 'name',
+                    'by_reference' => false,
                     'multiple' => true,
                     'expanded' => true,
                     'empty_data' => null,
@@ -123,6 +122,7 @@ class VehiclesType extends AbstractType
                 [
                     'class' => Equipments::class,
                     'choice_label' => 'name',
+                    'by_reference' => false,
                     'required' => false,
                     'multiple' => true,
                     'expanded' => true,

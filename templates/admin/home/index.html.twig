@@ -6,8 +6,9 @@
 {% block body %}
 	<h1>Votre tableau de bord</h1>
 
-
-	<a href="{{ path('admin_services_new') }}" class="btn btn-primary">Ajouter un service</a>
-	<a href="{{ path('admin_vehicles_new') }}" class="btn btn-primary">Ajouter un véhicule</a>
-	{# <a href="{{ path('admin_services_new') }}" class="btn btn-primary">Ajouter un service</a> #}
+	<div>
+		<a href="{{ path('admin_services_new') }}" class="btn btn-primary">Ajouter un service</a>
+		<a href="{{ path('admin_vehicles_new') }}" class="btn btn-primary">Ajouter un véhicule</a>
+		<a href="{{ path('admin_testimonials_new') }}" class="btn btn-primary">Ajouter un témoignage</a>
+	</div>
 {% endblock %}
