@@ -15,21 +15,27 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
         $faker = Factory::create('fr_FR');
         // Admin 1: admin@admin.com/admin
 
-        $admin1 = new User();
-        $admin1->setEmail('admin@admin.com');
-        $admin1->setPassword('$2y$13$tTTtcEQhFo7IBLywk8Lqk.UNooc2d/gnCp6yGIIF/lavdPLMEuQLm');
-        $admin1->setRoles(['ROLE_ADMIN']);
-        $manager->persist($admin1);
+        $administrateur = new User();
+        $administrateur->setFirstName('Georges');
+        $administrateur->setLastName('Parrot');
+        $administrateur->setEmail('admin@admin.com');
+        $administrateur->setPassword('$2y$13$tTTtcEQhFo7IBLywk8Lqk.UNooc2d/gnCp6yGIIF/lavdPLMEuQLm');
+        $administrateur->setRoles(['ROLE_ADMIN']);
+        $manager->persist($administrateur);
 
-        // Admin 2: admin2@admin.com/admin2
-        $admin2 = new User();
-        $admin2->setEmail('admin2@admin.com');
-        $admin2->setPassword('$2y$13$IPb6x8AKXKQpcknAATKD/ehc5aqBgHe0a7hEQgMjWKQmSAeCPViJm');
-        $admin2->setRoles(['ROLE_ADMIN']);
-        $manager->persist($admin2);
+        // Admin 2: administrateur2@admin.com/administrateur2
+        $administrateur2 = new User();
+        $administrateur2->setFirstName('Edouard');
+        $administrateur2->setLastName('Parrot');
+        $administrateur2->setEmail('administrateur2@admin.com');
+        $administrateur2->setPassword('$2y$13$IPb6x8AKXKQpcknAATKD/ehc5aqBgHe0a7hEQgMjWKQmSAeCPViJm');
+        $administrateur2->setRoles(['ROLE_ADMIN']);
+        $manager->persist($administrateur2);
 
         // Employee: employee@employee.com/employee
         $employee = new User();
+        $employee->setFirstName('Jacques');
+        $employee->setLastName('Lafougasse');
         $employee->setEmail('employee@employee.com');
         $employee->setPassword('$2y$13$bw2.cXrDKR86PsjrGy8jIeG7bNrZROublrWIjLd9wvPASC8OT5q7O');
         $employee->setRoles(['ROLE_EMPLOYEE']);

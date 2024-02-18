@@ -1,0 +1,42 @@
+{{ form_start(form) }}
+
+<div class="row">
+
+	<div class="row g-3">
+		<div class="col-1">
+			<label>{{form.lundi.vars.label}}</label>
+		</div>
+		<div class="col-1">
+			{{ form_row(form.lundi.morningStart) }}
+		</div>
+		<div class="col-1">
+			{{ form_row(form.lundi.morningEnd) }}
+		</div>
+		<div class="col-1">
+			{{ form_row(form.lundi.afternoonStart) }}
+		</div>
+		<div class="col-1">
+			{{ form_row(form.lundi.afternoonEnd) }}
+		</div>
+	</div>
+	<div class="row g-3">
+		<div class="col-1">
+			<label>{{form.mardi.vars.label}}</label>
+		</div>
+		<div class="col-1">
+			{{ form_row(form.mardi.morningStart) }}
+		</div>
+		<div class="col-1">
+			{{ form_row(form.mardi.morningEnd) }}
+		</div>
+		<div class="col-1">
+			{{ form_row(form.mardi.afternoonStart) }}
+		</div>
+		<div class="col-1">
+			{{ form_row(form.mardi.afternoonEnd) }}
+		</div>
+	</div>
+
+</div>
+<button class="btn btn-sm btn-primary">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}

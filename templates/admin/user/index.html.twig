@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ pageTitle }}
+{% endblock %}
+
+{% block body %}
+	<h1>{{ pageTitle }}</h1>
+	<div class="text-end">
+		<a href="{{ path('admin_users_new') }}" class="btn btn-primary">Ajouter un utilisateur</a>
+	</div>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Nom</th>
+				<th>Email</th>
+				<th>Roles</th>
+				<th>Créé le</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for user in users %}
+				<tr>
+					<td>
+						{{ user.fullName }}
+					</td>
+					<td>{{ user.email }}</td>
+					<td>{{ user.roles ? user.roles|getRoleName : '' }}</td>
+					<td>
+						{# {{ user.creatdAt }} #}
+					</td>
+					<td class="text-nowrap" style="width: 80px">
+						<a href="{{ path('admin_users_edit', {'id': user.id}) }}" class="btn btn-primary btn-sm">Editer</a>
+					</td>
+					<td class="text-nowrap" style="width: 80px">
+						{{ include('admin/user/_delete_form.html.twig') }}
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="5">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+{% endblock %}

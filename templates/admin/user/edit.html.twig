@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ pageTile }}
+{% endblock %}
+
+{% block body %}
+	<h1>{{ pageTile }}</h1>
+
+	<div>
+		<a href="{{ path('admin_users_index') }}">Retour</a>
+	</div>
+	<div>
+		{{ include('admin/user/_form.html.twig', {'button_label': 'Update'}) }}
+	</div>
+
+
+	{# {{ include('admin/user/_delete_form.html.twig') }} #}
+{% endblock %}
