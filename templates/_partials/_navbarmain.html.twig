@@ -1,4 +1,4 @@
-<div class="container-fluid bg-light">
+<div class="container-fluid bg-light mb-3 d-flex align-items-center justify-content-between">
 	<nav class="navbar navbar-expand-lg navbar-light ">
 		<div class="container">
 			<a class="navbar-brand" href="#"><img src="{{ asset('./images/logo.png')}}" alt="Garage V. Parrot"></a>
@@ -19,29 +19,43 @@
 					<li class="nav-item">
 						<a class="nav-link" href="{{ path('testimonials_index') }}">Témoignages</a>
 					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							Admin
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li>
-								<a class="dropdown-item" href="{{ path('admin_home_index')}}">Home</a>
-							</li>
-							<li>
-								<a class="dropdown-item" href="{{ path('admin_services_index')}}">Services</a>
-							</li>
-							<li>
-								<a class="dropdown-item" href="{{ path('admin_vehicles_index')}}">Vehicules</a>
-							</li>
-							<li>
-								<a class="dropdown-item" href="{{ path('admin_testimonials_index')}}">Témoignages</a>
-							</li>
-						</ul>
-					</li>
-					{# <li class="nav-item"><a class="nav-link disabled">Disabled</a></li> #}
+
+					{% if is_granted('ROLE_ADMIN') %}
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+								Admin
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<li>
+									<a class="dropdown-item" href="{{ path('admin_home_index')}}">Home</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="{{ path('admin_services_index')}}">Services</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="{{ path('admin_vehicles_index')}}">Vehicules</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="{{ path('admin_testimonials_index')}}">Témoignages</a>
+								</li>
+
+							</ul>
+						</li>
+					{% endif %}
 				</ul>
 
 			</div>
 		</div>
 	</nav>
+
+	<div class="navbar-nav ">
+		<div class="nav-item d-flex flex-row text-nowrap">
+			{% if app.user %}
+				<a class="nav-link px-3" href="{{ path('app_logout') }}">Déconnexion</a>
+			{% else %}
+				<a class="nav-link px-3" href="{{ path('app_login') }}">Connexion</a>
+			{% endif %}
+		</div>
+	</div>
+
 </div>

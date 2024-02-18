@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editer un témoignage
+{% endblock %}
+
+{% block body %}
+	<h1>{{ pageTitle }}</h1>
+	<a href="{{ path('admin_testimonials_index') }}">Retour</a>
+
+	{{ include('admin/testimonials/_form.html.twig') }}
+
+{# {{ include('admin/services/_form.html.twig', {'button_label': 'Mettre à jour'}) }} #}
+
+	{# {{ include('admin/services/_delete_form.html.twig') }} #}
+{% endblock %}

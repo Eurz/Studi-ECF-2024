@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un nouveau véhicule
+{% endblock %}
+
+{% block body %}
+	<h1>Ajouter un nouveau témoignage</h1>
+	<a href="{{ path('admin_testimonials_index') }}">Retour</a>
+
+
+	{{ include('admin/testimonials/_form.html.twig') }}
+
+{% endblock %}
