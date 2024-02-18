@@ -21,10 +21,13 @@ class ServicesType extends AbstractType
                 'empty_data' => ''
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'Description'
+                'label' => 'Description',
+                'attr' => ['rows' => '20'],
             ])
             ->add('excerpt', TextareaType::class, [
-                'label' => 'Résumé'
+                'label' => 'Résumé',
+                'attr' => ['rows' => '3'],
+
             ])
             ->add('isPublished', ChoiceType::class, [
                 'choices' => ['Brouillon' => 0, 'Publié' => 1],

@@ -12,14 +12,13 @@
 
 		<div class="col">
 			<h1>{{ service.title }}</h1>
+			{% if service.imageName %}
+				<div class="ms-5 mb-3 w-50 float-end">
+					<img src="{{ vich_uploader_asset(service) }}" class="card-img-top img-fluid" alt="{{service.title}}">
+				</div>
+			{% endif %}
 			<p>{{ service.description }}</p>
 		</div>
-		<div class="col-sm-4">
-			{% if service.imageName %}
-				<img src="{{ vich_uploader_asset(service) }}" class="card-img-top img-fluid" alt="{{service.title}}">
-			{% endif %}
-
-
-		</div>
+		<div></div>
 	</div>
 {% endblock %}

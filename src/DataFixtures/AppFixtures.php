@@ -23,15 +23,6 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
         $administrateur->setRoles(['ROLE_ADMIN']);
         $manager->persist($administrateur);
 
-        // Admin 2: administrateur2@admin.com/administrateur2
-        $administrateur2 = new User();
-        $administrateur2->setFirstName('Edouard');
-        $administrateur2->setLastName('Parrot');
-        $administrateur2->setEmail('administrateur2@admin.com');
-        $administrateur2->setPassword('$2y$13$IPb6x8AKXKQpcknAATKD/ehc5aqBgHe0a7hEQgMjWKQmSAeCPViJm');
-        $administrateur2->setRoles(['ROLE_ADMIN']);
-        $manager->persist($administrateur2);
-
         // Employee: employee@employee.com/employee
         $employee = new User();
         $employee->setFirstName('Jacques');
@@ -40,6 +31,15 @@ class AppFixtures extends Fixture implements FixtureGroupInterface
         $employee->setPassword('$2y$13$bw2.cXrDKR86PsjrGy8jIeG7bNrZROublrWIjLd9wvPASC8OT5q7O');
         $employee->setRoles(['ROLE_EMPLOYEE']);
         $manager->persist($employee);
+
+        // Utilisateur
+        $basicuser = new User();
+        $basicuser->setFirstName('Leon');
+        $basicuser->setLastName('Lafourche');
+        $basicuser->setEmail('user@user.com');
+        $basicuser->setPassword('$2y$13$aihh1LoxJqsWRGhC5R6JfO5GVvK37O0s.gXy2kSHzR7zyVIoRG6eS');
+        $basicuser->setRoles([]);
+        $manager->persist($basicuser);
         $manager->flush();
     }
 

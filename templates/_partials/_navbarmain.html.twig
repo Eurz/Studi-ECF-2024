@@ -22,21 +22,25 @@
 						</li>
 
 						{% if is_granted('ROLE_EMPLOYEE') %}
-							<li class="nav-item dropdown">
-								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-									Admin
+							<li class="nav-item dropdown border-start border-end">
+
+								<a class="nav-link dropdown-toggle text-primary" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+									Administration
 								</a>
 								<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 									<li>
 										<a class="dropdown-item" href="{{ path('admin_home_index')}}">Home</a>
 									</li>
 									<li>
-										<a class="dropdown-item" href="{{ path('admin_services_index')}}">Services</a>
-									</li>
-									<li>
 										<a class="dropdown-item" href="{{ path('admin_vehicles_index')}}">Vehicules</a>
 									</li>
+									<li>
+										<a class="dropdown-item" href="{{ path('admin_testimonials_index')}}">Témoignages</a>
+									</li>
 									{% if is_granted('ROLE_ADMIN') %}
+										<li>
+											<a class="dropdown-item" href="{{ path('admin_services_index')}}">Services</a>
+										</li>
 										<li>
 											<a class="dropdown-item" href="{{ path('admin_users_index')}}">Utilisateurs</a>
 										</li>
@@ -44,9 +48,6 @@
 											<a class="dropdown-item" href="{{ path('admin_schedules_index')}}">Horaires</a>
 										</li>
 									{% endif %}
-									<li>
-										<a class="dropdown-item" href="{{ path('admin_testimonials_index')}}">Témoignages</a>
-									</li>
 
 								</ul>
 							</li>
@@ -58,11 +59,16 @@
 		</nav>
 
 		<div class="navbar-nav ">
-			<div class="nav-item d-flex flex-row text-nowrap">
+			<div class="nav-item text-end">
 				{% if app.user %}
-					<a class="nav-link px-3" href="{{ path('app_logout') }}">Déconnexion</a>
+					<div>
+						{{ app.user.fullName }}
+						(
+						{{ app.user.roles|getRoleName }}
+						)</div>
+					<a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
 				{% else %}
-					<a class="nav-link px-3" href="{{ path('app_login') }}">Connexion</a>
+					<a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
 				{% endif %}
 			</div>
 		</div>

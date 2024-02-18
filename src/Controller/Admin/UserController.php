@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/user', name: 'admin_users_')]
+#[Route('/admin/users', name: 'admin_users_')]
 class UserController extends AbstractController
 {
     #[Route('/', name: 'index', methods: ['GET'])]

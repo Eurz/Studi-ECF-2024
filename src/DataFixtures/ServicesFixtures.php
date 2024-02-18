@@ -26,7 +26,7 @@ class ServicesFixtures extends Fixture implements FixtureGroupInterface
         for ($i = 0; $i < count($titles); $i++) {
             $equipment = new Services();
             $equipment->setTitle($titles[$i]);
-            $equipment->setDescription($faker->text());
+            $equipment->setDescription($faker->text(1000));
             $equipment->setExcerpt($faker->text());
             $equipment->setIsPublished(1);
             $manager->persist($equipment);
