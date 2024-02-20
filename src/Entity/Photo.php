@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Repository\PhotoRepository;
 use Doctrine\ORM\Mapping as ORM;
-// use Vich\UploaderBundle\Entity\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -35,18 +34,25 @@ class Photo
     private ?string $mimeType = null;
 
 
-    #[ORM\ManyToOne(inversedBy: 'photos')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Vehicle $vehicle = null;
+    // #[ORM\ManyToOne(inversedBy: 'photos')]
+    // #[ORM\JoinColumn(nullable: false)]
+    // private ?Vehicle $vehicle = null;
 
     #[ORM\Column(type: 'datetime_immutable')]
     private \DateTimeImmutable $createdAt;
+
     #[ORM\Column(type: 'datetime_immutable')]
     private \DateTimeImmutable $updatedAt;
 
     public function __construct()
     {
         $this->updatedAt = new \DateTimeImmutable();
+        $this->createdAt = new \DateTimeImmutable();
+    }
+
+    #[ORM\PrePersist]
+    public function prePersist()
+    {
         $this->createdAt = new \DateTimeImmutable();
     }
 
@@ -96,17 +102,17 @@ class Photo
         return $this->mimeType;
     }
 
-    public function getVehicle(): ?Vehicle
-    {
-        return $this->vehicle;
-    }
+    // public function getVehicle(): ?Vehicle
+    // {
+    //     return $this->vehicle;
+    // }
 
-    public function setVehicle(?Vehicle $vehicle): static
-    {
-        $this->vehicle = $vehicle;
+    // public function setVehicle(?Vehicle $vehicle): static
+    // {
+    //     $this->vehicle = $vehicle;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     /**
      * Get the value of imageName

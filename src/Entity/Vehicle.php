@@ -9,9 +9,12 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinTable;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: VehiclesRepository::class)]
 #[ORM\HasLifecycleCallbacks]
+#[Vich\Uploadable]
+
 class Vehicle
 {
     #[ORM\Id]
@@ -95,8 +98,8 @@ class Vehicle
     #[ORM\Column(type: Types::INTEGER, nullable: true)]
     private ?int $engineDisplacement = null;
 
-    #[ORM\OneToMany(mappedBy: 'vehicle', targetEntity: Photo::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
-    private Collection $photos;
+    // #[ORM\OneToMany(mappedBy: 'vehicle', targetEntity: Photo::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    // private Collection $photos;
 
     #[ORM\ManyToMany(targetEntity: Equipments::class)]
     private Collection $equipments;
@@ -113,7 +116,7 @@ class Vehicle
     {
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
-        $this->photos = new ArrayCollection();
+        // $this->photos = new ArrayCollection();
         $this->equipments = new ArrayCollection();
         $this->options = new ArrayCollection();
     }
@@ -414,35 +417,35 @@ class Vehicle
         return $this;
     }
 
-    /**
-     * @return Collection<int, Photo>
-     */
-    public function getPhotos(): Collection
-    {
-        return $this->photos;
-    }
+    // /**
+    //  * @return Collection<int, Photo>
+    //  */
+    // public function getPhotos(): Collection
+    // {
+    //     return $this->photos;
+    // }
 
-    public function addPhoto(Photo $photo): static
-    {
-        if (!$this->photos->contains($photo)) {
-            $this->photos->add($photo);
-            $photo->setVehicle($this);
-        }
+    // public function addPhoto(Photo $photo): static
+    // {
+    //     if (!$this->photos->contains($photo)) {
+    //         $this->photos->add($photo);
+    //         $photo->setVehicle($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removePhoto(Photo $photo): static
-    {
-        if ($this->photos->removeElement($photo)) {
-            // set the owning side to null (unless already changed)
-            if ($photo->getVehicle() === $this) {
-                $photo->setVehicle(null);
-            }
-        }
+    // public function removePhoto(Photo $photo): static
+    // {
+    //     if ($this->photos->removeElement($photo)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($photo->getVehicle() === $this) {
+    //             $photo->setVehicle(null);
+    //         }
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function toArray(): array
     {

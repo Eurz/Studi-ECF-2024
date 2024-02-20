@@ -7,7 +7,6 @@ use App\Form\VehiclesType;
 use App\Repository\VehiclesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -34,9 +33,7 @@ class VehiclesController extends AbstractController
         $vehicle = new Vehicle();
         $form = $this->createForm(VehiclesType::class, $vehicle);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-            // dd($form->getData());
             $entityManager->persist($vehicle);
             $entityManager->flush();
             $this->addFlash('success', 'Véhicule bien enregistré');
@@ -59,7 +56,6 @@ class VehiclesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // dd($vehicle);
             $entityManager->flush();
 
             return $this->redirectToRoute('admin_vehicles_index', [], Response::HTTP_SEE_OTHER);

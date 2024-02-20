@@ -52,7 +52,6 @@ class VehiclesRepository extends ServiceEntityRepository
             ->setMaxResults(10)
             ->getQuery()
             ->getResult(AbstractQuery::HYDRATE_ARRAY);
-        // ->orderBy('v.id', 'ASC');
         return $vehicles;
     }
     //    /**

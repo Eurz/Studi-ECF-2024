@@ -17,8 +17,7 @@
 					<th scope="col">Kilométrage</th>
 					<th scope="col">Image</th>
 					<th scope="col">Mise en circulation</th>
-					<th scope="col">Moteur</th>
-					{# <th scope="col"></th> #}
+					<th scope="col" style="width: 80px">Moteur</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -36,10 +35,14 @@
 						</td>
 						<td>{{vehicle.mileage}}
 							kms</td>
-						<td>{{ vehicle.featuredImage}}</td>
+						{# <td>{{ vehicle.featuredImage}}</td> #}
 						<td>{{ vehicle.releaseDate|date('d/m/Y', timezone="Europe/Paris")}}</td>
 						<td>{{ vehicle.motorization}}</td>
-						{# <td><a href="{{ path('admin_vehicles_edit', {'id': vehicle.id}) }}" class="btn btn-sm btn-primary"><span data-feather="edit">Editer</span></a></td> #}
+						<td>
+							<a href="{{ path('admin_vehicles_edit', {'id': vehicle.id}) }}" class="btn btn-sm btn-primary">
+								<span data-feather="edit">Editer</span>
+							</a>
+						</td>
 					</tr>
 				{% else %}
 					<tr>

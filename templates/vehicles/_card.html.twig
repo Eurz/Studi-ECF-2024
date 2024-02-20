@@ -1,5 +1,7 @@
 <div class="card border-0 h-100">
-	{% if vehicle.photos %}
+	{% if vehicle.featuredImage %}
+		{# <img src="{{ vich_uploader_asset(vehicle) }}" class="card-img-top img-fluid" alt="{{vehicle.title}}"> #}
+
 		<img src="{{ asset('uploads/images/default.png') }}" class="card-img-top img-fluid" alt="{{vehicle.brandName}}"/>
 	{% else %}
 		<img src="{{ asset('uploads/images/default.png') }}" class="card-img-top img-fluid" alt="{{vehicle.brandName}}"/>

@@ -3,12 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Photo;
-use App\Entity\Vehicle;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Vich\UploaderBundle\Form\Type\VichFileType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class PhotoType extends AbstractType
@@ -18,13 +15,10 @@ class PhotoType extends AbstractType
         $builder
             ->add('imageFile', VichImageType::class, [
                 'label' => false,
-                // 'required' => false,
                 'allow_delete' => true,
                 'delete_label' => 'Supprimer',
                 'download_label' => true,
-                // 'download_uri' => true,
                 'image_uri' => true,
-                // 'imagine_pattern' => '...',
                 'asset_helper' => true,
             ]);
     }

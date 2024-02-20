@@ -21,6 +21,7 @@ class VehiclesType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+
         $builder
             ->add('brandName', ChoiceType::class, [
                 'label' => 'Marque',
@@ -46,22 +47,18 @@ class VehiclesType extends AbstractType
                 'view_timezone' => 'Europe/Paris',
                 'widget' => 'choice',
                 'years' => range(1980, 2024)
-                // 'html5' => false
-                // 'input' => 'string '
             ])
             ->add('price', NumberType::class, ['label' => 'Prix'])
             ->add('featuredImage', PhotoType::class, [
                 'label' => 'Image mise en avant',
-                // 'by_reference' => false
+                'by_reference' => false
             ])
             ->add('mileage', NumberType::class, ['label' => 'Kilométrage (kms)'])
             ->add('fiscalPower', ChoiceType::class, [
                 'label' => 'Puissance fiscale',
                 'choices' => ['4' => 4, '5' => 5, '6' => 6, '7' => 7],
                 'placeholder' => '--- Choix ---',
-                // 'placeholder_attr' => [
-                //     ['title' => 'Choose an option'],
-                // ],
+                'required' => false
 
             ])
             // Features 
@@ -81,21 +78,21 @@ class VehiclesType extends AbstractType
                 'placeholder' => '--- Choix ---',
                 'required' => false
             ])
-            ->add(
-                'photos',
-                CollectionType::class,
-                [
-                    'entry_type' => PhotoType::class,
-                    'allow_add' => true,
-                    'allow_delete' => true,
-                    'by_reference' => false,
-                    'prototype' => true,
-                    'prototype_name' => '__new_photo__',
-                    'delete_empty' => function (Photo $photo) {
-                        return $photo->getImageFile() === null;
-                    },
-                ]
-            )
+            // ->add(
+            //     'photos',
+            //     CollectionType::class,
+            //     [
+            //         'entry_type' => PhotoType::class,
+            //         'allow_add' => true,
+            //         'allow_delete' => true,
+            //         'by_reference' => false,
+            //         'prototype' => true,
+            //         'prototype_name' => '__new_photo__',
+            //         'delete_empty' => function (Photo $photo) {
+            //             return $photo->getImageFile() === null;
+            //         },
+            //     ]
+            // )
             ->add(
                 'equipments',
                 EntityType::class,
@@ -113,7 +110,6 @@ class VehiclesType extends AbstractType
                             ->setParameter('isOption', 0)
                             ->orderBy('e.name', 'ASC');
                     },
-                    // 'help' => 'You must choose at least one technician'
                 ]
             )
             ->add(
@@ -133,18 +129,8 @@ class VehiclesType extends AbstractType
                             ->setParameter('isOption', 1)
                             ->orderBy('e.name', 'ASC');
                     },
-                    // 'help' => 'You must choose at least one technician'
                 ]
             );
-
-        // ->add('consumption', NumberType::class, ['label' => 'Consommation (l/100km)', 'required' => false])
-        // ->add('emissionRate', NumberType::class, ['label' => 'Emission (g CO2/km)', 'required' => false])
-        // ->add('energyClass', TextType::class, ['required' => false,])
-        // ->add('length', NumberType::class, ['label' => 'Longueur', 'row_attr' => ['class' => 'test', 'id' => 'coucou'], 'required' => false])
-        // ->add('width', NumberType::class, ['label' => 'Largeur', 'required' => false])
-        // ->add('height', NumberType::class, ['label' => 'Hauteur', 'required' => false])
-        // ->add('unloadedWeight', NumberType::class, ['label' => 'Poids à vide (kg)', 'required' => false])
-        // ->add('totalWeight', NumberType::class, ['label' => 'Poids total en charge (kg)', 'required' => false])
     }
 
     public function configureOptions(OptionsResolver $resolver): void

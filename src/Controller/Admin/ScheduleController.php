@@ -2,9 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Schedule;
 use App\Form\SchedulesFormType;
-use App\Form\SchedulesType;
 use App\Repository\ScheduleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,11 +19,6 @@ class ScheduleController extends AbstractController
         $data = $scheduleRepository->findAll();
         $form = $this->createForm(
             SchedulesFormType::class,
-            // $data,
-            // [
-            //     'action' => $this->generateUrl('target_route'),
-            //     'method' => 'POST',
-            // ]
         );
         $form->handleRequest($request);
 
