@@ -5,7 +5,6 @@
 		{{ form_row(form.title) }}
 		{{ form_row(form.excerpt) }}
 		{{ form_row(form.description) }}
-		{{ form_row(form.imageFile) }}
 	</div>
 	<div class="col-4 bg-light p-3">
 		<div class="mb-3">
@@ -25,6 +24,12 @@
 		</div>
 		<div>
 			{{ form_row(form.isPublished) }}
+		</div>
+		<div>
+			{{ form_row(form.imageFile) }}
+			<pre>
+				{{ dump(form.imageFile) }}
+			</pre>
 		</div>
 	</div>
 </div>

@@ -44,6 +44,9 @@ class Photo
     #[ORM\Column(type: 'datetime_immutable')]
     private \DateTimeImmutable $updatedAt;
 
+    #[ORM\ManyToOne(inversedBy: 'photos')]
+    private ?Services $mainServices = null;
+
     public function __construct()
     {
         $this->updatedAt = new \DateTimeImmutable();
@@ -151,4 +154,16 @@ class Photo
 
     //     return $this;
     // }
+
+    public function getMainServices(): ?Services
+    {
+        return $this->mainServices;
+    }
+
+    public function setMainServices(?Services $mainServices): static
+    {
+        $this->mainServices = $mainServices;
+
+        return $this;
+    }
 }

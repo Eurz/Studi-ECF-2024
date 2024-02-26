@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Component\PropertyAccess\PropertyPath;
 
 class PhotoType extends AbstractType
 {
@@ -14,10 +15,10 @@ class PhotoType extends AbstractType
     {
         $builder
             ->add('imageFile', VichImageType::class, [
-                'label' => false,
+                'label' => 'test',
                 'allow_delete' => true,
-                'delete_label' => 'Supprimer',
-                'download_label' => true,
+                'delete_label' => 'Supprimer cette image',
+                'download_label' => 'download_file',
                 'image_uri' => true,
                 'asset_helper' => true,
             ]);
