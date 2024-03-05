@@ -1,0 +1,9 @@
+{% block text_widget %}
+	<div class="form-group">
+		<div class="bg-primary">
+			{{ form_label(form) }}
+		</div>
+		<input type="text" class="form-control" {{ block('widget_attributes') }}/>
+		{{ form_errors(form) }}
+	</div>
+{% endblock %}

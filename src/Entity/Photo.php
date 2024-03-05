@@ -19,7 +19,7 @@ class Photo
     #[ORM\CustomIdGenerator('doctrine.uuid_generator')]
 
     private ?string $id = null;
-
+    #[Assert\Image(mimeTypes: ["image/jpeg"])]
     #[Vich\UploadableField(mapping: 'vehicle_photo', fileNameProperty: 'imageName', size: 'imageSize', mimeType: 'mimeType')]
     #[Assert\Image(mimeTypes: ["image/jpeg"])]
     private ?File $imageFile = null;
@@ -64,7 +64,9 @@ class Photo
     {
         $this->updatedAt = new \DateTimeImmutable();
     }
-
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
     public function setImageFile(?File $imageFile = null): void
     {
         $this->imageFile = $imageFile;
@@ -131,29 +133,29 @@ class Photo
         $this->imageName = $imageName;
     }
 
-    // public function getCreatedAt()
-    // {
-    //     return $this->createdAt;
-    // }
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
 
-    // public function setCreatedAt($createdAt)
-    // {
-    //     $this->createdAt = $createdAt;
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
-    // public function getUpdatedAt()
-    // {
-    //     return $this->updatedAt;
-    // }
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
 
-    // public function setUpdatedAt($updatedAt)
-    // {
-    //     $this->updatedAt = $updatedAt;
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
 
-    //     return $this;
-    // }
+        return $this;
+    }
 
     public function getMainServices(): ?Services
     {

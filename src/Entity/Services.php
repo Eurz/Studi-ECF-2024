@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 #[ORM\Entity(repositoryClass: ServicesRepository::class)]
 #[UniqueEntity('slug', 'This slug is already existing')]
@@ -63,14 +64,14 @@ class Services
     #[ORM\Column(nullable: true)]
     private ?int $imageSize = null;
 
-    #[ORM\OneToMany(mappedBy: 'mainServices', targetEntity: Photo::class)]
+    #[ORM\OneToMany(mappedBy: 'mainServices', cascade: ['persist', 'merge', 'remove'], targetEntity: Photo::class, orphanRemoval: true)]
     private Collection $photos;
 
     public function setImageFile(?File $imageFile = null): void
     {
         $this->imageFile = $imageFile;
 
-        if (null !== $imageFile) {
+        if ($this->imageFile instanceof UploadedFile) {
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
             $this->updatedAt = new \DateTimeImmutable();
