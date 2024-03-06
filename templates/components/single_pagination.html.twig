@@ -1,0 +1,45 @@
+{# default Sliding pagination control implementation #}
+{% set align = 'center' %}
+{% set size = 'large' %}
+{% set style = 'bottom' %}
+
+{% extends '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig' %}
+{# {% if pageCount > 1 %}
+	<ul class="pagination justify-content-center">
+		{% if first is defined and current != first %}
+			<li class="page-item">
+				<a href="{{ path(route, query|merge({(pageParameterName): first})) }}" class="page-link">&lt;&lt;</a>
+			</li>
+		{% endif %}
+
+		{% if previous is defined %}
+			<li class="v">
+				<a rel="prev" href="{{ path(route, query|merge({(pageParameterName): previous})) }}" class="page-link">&lt;</a>
+			</li>
+		{% endif %}
+
+		{% for page in pagesInRange %}
+			{% if page != current %}
+				<li class="page-item">
+					<a href="{{ path(route, query|merge({(pageParameterName): page})) }}" class="page-link">{{ page }}</a>
+				</li>
+			{% else %}
+				<li class="page-item active">
+					<span class="page-link">{{ page }}</span>
+				</li>
+			{% endif %}
+		{% endfor %}
+
+		{% if next is defined %}
+			<li class="page-item">
+				<a rel="next" href="{{ path(route, query|merge({(pageParameterName): next})) }}" class="page-link">&gt;</a>
+			</li>
+		{% endif %}
+
+		{% if last is defined and current != last %}
+			<li class="page-item">
+				<a href="{{ path(route, query|merge({(pageParameterName): last})) }}" class="page-link" s>&gt;&gt;</a>
+			</li>
+		{% endif %}
+	</ul>
+{% endif %} #}

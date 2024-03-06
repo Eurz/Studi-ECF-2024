@@ -61,6 +61,7 @@ class ServicesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // dd($form->getData());
             $entityManager->flush();
 
             return $this->redirectToRoute('admin_services_edit', ['slug' => $service->getSlug()], Response::HTTP_SEE_OTHER);

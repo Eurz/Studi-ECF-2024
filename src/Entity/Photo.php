@@ -19,7 +19,7 @@ class Photo
     #[ORM\CustomIdGenerator('doctrine.uuid_generator')]
 
     private ?string $id = null;
-    #[Assert\Image(mimeTypes: ["image/jpeg"])]
+    // #[Assert\Image(mimeTypes: ["image/jpeg"])]
     #[Vich\UploadableField(mapping: 'vehicle_photo', fileNameProperty: 'imageName', size: 'imageSize', mimeType: 'mimeType')]
     #[Assert\Image(mimeTypes: ["image/jpeg"])]
     private ?File $imageFile = null;
@@ -44,7 +44,7 @@ class Photo
     #[ORM\Column(type: 'datetime_immutable')]
     private \DateTimeImmutable $updatedAt;
 
-    #[ORM\ManyToOne(inversedBy: 'photos')]
+    #[ORM\ManyToOne(inversedBy: 'photos', cascade: ['persist', 'remove'])]
     private ?Services $mainServices = null;
 
     public function __construct()

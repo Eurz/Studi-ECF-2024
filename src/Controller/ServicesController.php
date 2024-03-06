@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Services;
 use App\Repository\ServicesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -12,10 +13,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class ServicesController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(ServicesRepository $servicesRepository): Response
+    public function index(Request $request, ServicesRepository $servicesRepository): Response
     {
-        $services = $servicesRepository->findBy(['isPublished' => true]);
-
+        $page = $request->query->getInt('page', 1);
+        $services = $servicesRepository->getPaginatedServices($page);
         return $this->render('services/index.html.twig', [
             'page_title' => 'Nos services',
             'services' => $services

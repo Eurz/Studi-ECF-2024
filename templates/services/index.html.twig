@@ -6,7 +6,12 @@
 
 {% block body %}
 
-	<h1>{{page_title}}</h1>
+	<h1>{{page_title}}
+
+		<span class="badge bg-primary rounded-pill fs-6">
+			{{ services.getTotalItemCount }}
+		</span>
+	</h1>
 
 	<div class="row row-cols-1 row-cols-md-3 g-4">
 		{% for service in services %}
@@ -16,4 +21,7 @@
 			</div>
 		{% endfor %}
 	</div>
+	<div class="">
+		{% set align = 'center' %}
+		{{ knp_pagination_render(services) }}</div>
 {% endblock %}

@@ -22,10 +22,11 @@ class ServicesFixtures extends Fixture implements FixtureGroupInterface
             'Carrosserie',
             'Parallélisme'
         ];
+
         $faker = Factory::create('fr_FR');
         for ($i = 0; $i < count($titles); $i++) {
             $equipment = new Services();
-            $equipment->setTitle($titles[$i]);
+            $equipment->setTitle($faker->words(4, true));
             $equipment->setDescription($faker->text(1000));
             $equipment->setExcerpt($faker->text());
             $equipment->setIsPublished(1);
