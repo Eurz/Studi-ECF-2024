@@ -33,11 +33,6 @@ class Photo
     #[ORM\Column(nullable: true)]
     private ?string $mimeType = null;
 
-
-    // #[ORM\ManyToOne(inversedBy: 'photos')]
-    // #[ORM\JoinColumn(nullable: false)]
-    // private ?Vehicle $vehicle = null;
-
     #[ORM\Column(type: 'datetime_immutable')]
     private \DateTimeImmutable $createdAt;
 

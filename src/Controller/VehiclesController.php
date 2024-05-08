@@ -38,7 +38,6 @@ class VehiclesController extends AbstractController
     #[Route('/{id}/view', name: 'view')]
     public function view(Vehicle $vehicle): Response
     {
-
         return $this->render('vehicles/view.html.twig', [
             'vehicle' => $vehicle
         ]);

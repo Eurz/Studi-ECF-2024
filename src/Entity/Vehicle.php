@@ -13,7 +13,6 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: VehiclesRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-#[Vich\Uploadable]
 
 class Vehicle
 {
@@ -26,7 +25,6 @@ class Vehicle
     #[ORM\Column(length: 50)]
     #[Assert\NotBlank(message: 'Le titre est requis')]
     private ?string $brandName = null;
-
 
     #[ORM\Column(length: 50)]
     #[Assert\NotBlank(message: 'Le modèle est requis')]
@@ -109,8 +107,9 @@ class Vehicle
     private Collection $options;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Photo $featuredImage = null;
+
 
     public function __construct()
     {

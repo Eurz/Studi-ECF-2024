@@ -47,7 +47,6 @@ class Services
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column]
-
     private ?bool $isPublished = null;
 
     #[ORM\Column(type: 'string', length: 255, unique: true)]
@@ -55,11 +54,11 @@ class Services
 
 
     // Upload of featured image
-    #[Vich\UploadableField(mapping: 'services', fileNameProperty: 'imageName', size: 'imageSize')]
+    #[Vich\UploadableField(mapping: 'services', fileNameProperty: 'featuredImage', size: 'imageSize')]
     private ?File $imageFile = null;
 
     #[ORM\Column(nullable: true)]
-    private ?string $imageName = null;
+    private ?string $featuredImage = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $imageSize = null;
@@ -67,13 +66,14 @@ class Services
     #[ORM\OneToMany(mappedBy: 'mainServices', cascade: ['persist', 'merge', 'remove'], targetEntity: Photo::class, orphanRemoval: true)]
     private Collection $photos;
 
+    // #[ORM\Column(length: 255, nullable: true)]
+    private ?string $imageFolder = null;
+
     public function setImageFile(?File $imageFile = null): void
     {
         $this->imageFile = $imageFile;
 
         if ($this->imageFile instanceof UploadedFile) {
-            // It is required that at least one field changes if you are using doctrine
-            // otherwise the event listeners won't be called and the file is lost
             $this->updatedAt = new \DateTimeImmutable();
         }
     }
@@ -82,14 +82,14 @@ class Services
         return $this->imageFile;
     }
 
-    public function setImageName(?string $imageName): void
+    public function setFeaturedImage(?string $featuredImage): void
     {
-        $this->imageName = $imageName;
+        $this->featuredImage = $featuredImage;
     }
 
-    public function getImageName(): ?string
+    public function getFeaturedImage(): ?string
     {
-        return $this->imageName;
+        return $this->featuredImage;
     }
 
     public function setImageSize(?int $imageSize): void
@@ -243,6 +243,20 @@ class Services
                 $photo->setMainServices(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImageFolder(): ?string
+    {
+        return $this->imageFolder;
+    }
+
+    public function setImageFolder(?string $imageFolder): static
+    {
+        $path = date('Y/m/d/');
+
+        $this->imageFolder = $path;
 
         return $this;
     }

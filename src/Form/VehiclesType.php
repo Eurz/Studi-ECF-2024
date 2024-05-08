@@ -51,7 +51,7 @@ class VehiclesType extends AbstractType
             ->add('price', NumberType::class, ['label' => 'Prix'])
             ->add('featuredImage', PhotoType::class, [
                 'label' => 'Image mise en avant',
-                'by_reference' => false
+                'by_reference' => true,
             ])
             ->add('mileage', NumberType::class, ['label' => 'Kilométrage (kms)'])
             ->add('fiscalPower', ChoiceType::class, [

@@ -12,18 +12,25 @@
 		<div class="">
 			<h2>Nos véhicules d'occasions</h2>
 		</div>
-		<div>
-			<a href="{{ path('services_index') }}" class="btn btn-primary">Découvrir nos services</a>
-		</div>
-	</div>
-	<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-4">
-		{% for vehicle in vehicles %}
-
-			<div class=" col">
-				{% include "./vehicles/_card.html.twig" %}
+		{% if vehicles %}
+			<div>
+				<a href="{{ path('vehicles_index') }}" class="btn btn-primary">Découvrir nos véhicules</a>
 			</div>
-		{% endfor %}
+		{% endif %}
 	</div>
+	{% if vehicles %}
+		<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-4">
+			{% for vehicle in vehicles %}
+
+				<div class=" col">
+					{% include "./vehicles/_card.html.twig" %}
+				</div>
+			{% endfor %}
+		</div>
+	{% else %}
+		<p>Aucun véhicule disponible actuellement.</p>
+	{% endif %}
+
 	<div class="d-flex justify-content-between">
 		<div class="">
 			<h2>Nos services</h2>
